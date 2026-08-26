@@ -1,0 +1,18 @@
+{
+  "id": "./demo.html",
+  "name": "مزاد مسقط",
+  "short_name": "MAZQAT",
+  "description": "تجربة مزادات حية واضحة وآمنة للقطع المختارة في مسقط.",
+  "lang": "ar-OM",
+  "dir": "rtl",
+  "start_url": "./demo.html#discover",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6fb",
+  "theme_color": "#102a43",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
