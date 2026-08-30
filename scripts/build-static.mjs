@@ -19,7 +19,6 @@ const assets = [
   'favicon.svg',
   'icon-192.png',
   'icon-512.png',
-  'khadamati-theme.css',
   'manifest.webmanifest',
   'og.png',
   'sw.js',

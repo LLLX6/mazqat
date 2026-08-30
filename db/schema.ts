@@ -14,7 +14,7 @@ export const demoAuctionState = sqliteTable('demo_auction_state', {
   lastBidId: text('last_bid_id'),
   version: integer('version').notNull().default(0),
   status: text('status', {
-    enum: ['live', 'closing', 'sold', 'unsold'],
+    enum: ['live', 'paused', 'closing', 'sold', 'unsold'],
   })
     .notNull()
     .default('live'),

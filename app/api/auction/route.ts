@@ -8,7 +8,7 @@ const OPENING_BAISA = 860_000;
 const ALLOWED_INCREMENTS = new Set([1_000, 5_000, 10_000]);
 const ID_PATTERN = /^[A-Za-z0-9-]{16,64}$/;
 
-type AuctionStatus = 'live' | 'closing' | 'sold' | 'unsold';
+type AuctionStatus = 'live' | 'paused' | 'closing' | 'sold' | 'unsold';
 
 type AuctionRow = {
   lotId: string;

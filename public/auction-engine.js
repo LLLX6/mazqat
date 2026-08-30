@@ -10,6 +10,7 @@ export function createAuctionState(overrides = {}) {
     remainingSeconds: 31,
     softCloseWindowSeconds: 10,
     status: 'live',
+    allowedIncrements: [...ALLOWED_INCREMENTS],
     withdrawn: false,
     seenKeys: [],
     bids: [
@@ -36,7 +37,8 @@ export function applyBid(state, input) {
 
   if (state.status !== 'live') return { ok: false, code: 'AUCTION_NOT_LIVE', state };
   if (state.withdrawn) return { ok: false, code: 'PARTICIPANT_WITHDRAWN', state };
-  if (!ALLOWED_INCREMENTS.includes(incrementBaisa)) return { ok: false, code: 'INVALID_INCREMENT', state };
+  const allowedIncrements = Array.isArray(state.allowedIncrements) ? state.allowedIncrements : ALLOWED_INCREMENTS;
+  if (!allowedIncrements.includes(incrementBaisa)) return { ok: false, code: 'INVALID_INCREMENT', state };
   if (!nickname || nickname.length > 24) return { ok: false, code: 'INVALID_NICKNAME', state };
   if (!idempotencyKey) return { ok: false, code: 'MISSING_IDEMPOTENCY_KEY', state };
   if (state.seenKeys.includes(idempotencyKey)) return { ok: true, duplicate: true, state };
@@ -69,6 +71,33 @@ export function tickAuction(state, seconds = 1) {
 export function settleAuction(state) {
   if (state.status !== 'closing') return state;
   return { ...state, status: state.leader ? 'sold' : 'unsold', winner: state.leader || null };
+}
+
+export function pauseAuction(state) {
+  if (state.status !== 'live') return state;
+  return { ...state, status: 'paused', version: state.version + 1 };
+}
+
+export function resumeAuction(state) {
+  if (state.status !== 'paused') return state;
+  return { ...state, status: 'live', version: state.version + 1 };
+}
+
+export function extendAuction(state, seconds = 30) {
+  if (!['live', 'paused'].includes(state.status)) return state;
+  const safeSeconds = Math.min(300, Math.max(1, Math.floor(Number(seconds) || 0)));
+  return { ...state, remainingSeconds: state.remainingSeconds + safeSeconds, version: state.version + 1 };
+}
+
+export function closeAuction(state) {
+  if (!['live', 'paused'].includes(state.status)) return state;
+  return { ...state, remainingSeconds: 0, status: 'closing', version: state.version + 1 };
+}
+
+export function setAllowedIncrements(state, increments) {
+  const unique = [...new Set((increments || []).map(Number))].filter((value) => ALLOWED_INCREMENTS.includes(value));
+  if (!unique.length) return state;
+  return { ...state, allowedIncrements: unique, version: state.version + 1 };
 }
 
 export function withdrawParticipant(state) {

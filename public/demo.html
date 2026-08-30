@@ -3,205 +3,479 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f4f6fb">
+  <meta name="theme-color" content="#073249">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="مزاد مسقط — تجربة مزادات حية حديثة وواضحة للقطع المختارة.">
+  <meta name="description" content="MAZQAT — شبكة مزادات حية للمزايدين ومنظّمي المزادات المعتمدين في عُمان.">
   <meta property="og:title" content="مزاد مسقط | MAZQAT">
-  <meta property="og:description" content="شاهد. زايد. اكسب. تجربة مزاد حي بطابع عُماني.">
+  <meta property="og:description" content="شاهد القطعة، زايد بثقة، أو شغّل مزادك من مكان واحد.">
   <meta property="og:image" content="./og.png">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icon-192.png" type="image/png">
-  <link rel="stylesheet" href="./app.css">
-  <link rel="stylesheet" href="./khadamati-theme.css">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./app.css?v=0.10.0">
   <title>مزاد مسقط | MAZQAT</title>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">انتقل إلى المحتوى</a>
-  <div class="demo-ribbon" role="status">
-    <span><b>نسخة معاينة</b> — البيانات والعمليات هنا تجريبية ولا تمثل بيعًا حقيقيًا.</span>
-    <button type="button" data-open-modal="demoInfo">ما الذي يعمل؟</button>
+  <a class="skip-link" href="#mainContent">انتقل إلى المحتوى</a>
+
+  <div class="preview-bar" role="status">
+    <span><b>معاينة تفاعلية</b> · لا توجد عمليات بيع أو دفع حقيقية</span>
+    <button type="button" data-open-dialog="previewDialog">حدود النسخة</button>
   </div>
 
-  <header class="app-header">
-    <button class="brand button-reset" type="button" data-view="discover" aria-label="مزاد مسقط — الرئيسية">
-      <span class="brand-mark" aria-hidden="true">م</span>
-      <span><strong>مزاد مسقط</strong><small>MAZQAT</small></span>
-    </button>
-    <nav class="desktop-nav" aria-label="التنقل الرئيسي">
-      <button class="active" type="button" data-view="discover">اكتشف</button>
-      <button type="button" data-view="live">المزاد الآن <i class="live-pip"></i></button>
-      <button type="button" data-view="lots">المعروضات</button>
-      <button type="button" data-view="orders">طلباتي</button>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-button notification-button" type="button" data-view="orders" aria-label="الإشعارات"><span aria-hidden="true">🔔</span><i id="notificationDot"></i></button>
-      <button class="owner-entry" type="button" data-view="admin"><span aria-hidden="true">📊</span> مركز الإدارة</button>
-      <button class="profile-chip" type="button" data-view="account"><span class="avatar">👤</span><span><small>مرحبًا</small><b id="headerNickname">حمد_مسقط</b></span></button>
+  <section class="entry-gateway" id="entryGateway" aria-labelledby="entryTitle">
+    <div class="entry-brand-panel">
+      <div class="entry-brand">
+        <span class="brand-symbol">م</span>
+        <span><b>مزاد مسقط</b><small>MAZQAT NETWORK</small></span>
+      </div>
+      <div class="entry-message">
+        <span class="signal-pill"><i></i> مزاد حي الآن</span>
+        <h1 id="entryTitle">مكان واحد.<br><em>تجربتان واضحتان.</em></h1>
+        <p>ادخل لتنافس على قطعة، أو شغّل مزاداتك ضمن حساب منظّم معتمد وصلاحيات فريقك.</p>
+      </div>
+      <div class="entry-live-preview">
+        <img src="./og.png" alt="ساعة فاخرة معروضة في مزاد حي">
+        <div class="entry-live-overlay">
+          <span><i></i> مباشر · ١٢٨ يشاهدون</span>
+          <b>السعر الحالي <bdi>٨٦٠٫٠٠٠ ر.ع.</bdi></b>
+        </div>
+      </div>
+      <div class="entry-trust">
+        <span>✓ حسابات منظّمين معتمدة</span>
+        <span>✓ زيادات واضحة قبل الضغط</span>
+        <span>✓ لا دردشة مشتتة</span>
+      </div>
     </div>
-  </header>
 
-  <div class="connection-bar" id="connectionBar" role="status" aria-live="polite">
-    <span class="connection-dot"></span><span id="connectionText">وضع المعاينة المحلية — المزايدات محفوظة على هذا الجهاز فقط</span>
+    <div class="entry-choice-panel">
+      <div class="entry-choice-copy">
+        <p class="kicker">اختر تجربتك</p>
+        <h2>كيف تريد استخدام التطبيق؟</h2>
+        <p>يمكنك تبديل التجربة لاحقًا من حسابك.</p>
+      </div>
+
+      <button class="role-card bidder-role" type="button" data-enter-role="bidder">
+        <span class="role-icon coral">👆</span>
+        <span class="role-copy">
+          <small>للأفراد والمشترين</small>
+          <b>أريد المزايدة والشراء</b>
+          <span>اكتشف البثوث، تابع القطع، زايد، واستلم فوزك.</span>
+        </span>
+        <span class="role-arrow" aria-hidden="true">←</span>
+      </button>
+
+      <button class="role-card partner-role" type="button" data-enter-role="partner">
+        <span class="role-icon teal">🎥</span>
+        <span class="role-copy">
+          <small>للتجّار ودور المزادات</small>
+          <b>أريد تنظيم مزادات</b>
+          <span>حساب معتمد، فريق، كتالوج، بث، وتقارير اشتراك.</span>
+        </span>
+        <span class="role-arrow" aria-hidden="true">←</span>
+      </button>
+
+      <div class="entry-plan-hint">
+        <span class="mini-stack"><i>٤</i><i>١٠</i><i>٥٠</i></span>
+        <span><b>خطط تناسب حجم فريقك</b><small>منظّم مستقل، استوديو، أو شبكة فروع.</small></span>
+      </div>
+
+      <button class="owner-access" type="button" data-enter-role="owner">
+        <span>◆</span> دخول مالك المنصة <small>معاينة الإدارة العليا</small>
+      </button>
+      <p class="entry-legal">بالدخول أنت تستخدم بيانات تجريبية فقط. الاشتراك والتفعيل الحقيقيان يحتاجان موافقة المالك.</p>
+    </div>
+  </section>
+
+  <div class="app-shell" id="appShell" hidden>
+    <header class="topbar">
+      <button class="compact-brand" type="button" data-open-gateway aria-label="تبديل نوع الحساب">
+        <span class="brand-symbol small">م</span>
+        <span><b>مزاد مسقط</b><small>MAZQAT</small></span>
+      </button>
+
+      <button class="context-switcher" id="contextSwitcher" type="button" data-open-gateway>
+        <span id="contextIcon">👆</span>
+        <span><small>أنت تستخدم الآن</small><b id="contextLabel">حساب مزايد</b></span>
+        <i aria-hidden="true">⌄</i>
+      </button>
+
+      <div class="topbar-actions">
+        <button class="top-search" type="button" data-nav-target="explore"><span>⌕</span><span>ابحث عن قطعة أو مزاد</span><kbd>⌘ K</kbd></button>
+        <button class="round-action" type="button" data-open-dialog="notificationDialog" aria-label="الإشعارات">🔔<i></i></button>
+        <button class="profile-action" type="button" data-nav-target="profile"><span>ح</span><b id="profileShortLabel">حمد</b></button>
+      </div>
+    </header>
+
+    <aside class="desktop-sidebar" aria-label="التنقل الرئيسي">
+      <div class="sidebar-nav" id="desktopNav"></div>
+      <div class="sidebar-support">
+        <span class="support-icon">◉</span>
+        <span><b>تحتاج مساعدة؟</b><small>مركز دعم MAZQAT</small></span>
+        <button type="button" data-toast="الدعم المباشر غير مفعّل في المعاينة.">فتح</button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+      <div class="connection-notice" id="connectionNotice" role="status" aria-live="polite">
+        <i></i><span>معاينة هذا الجهاز · العروض ليست بيعًا حقيقيًا</span>
+      </div>
+
+      <section class="app-screen" data-screen="bidder-home" aria-labelledby="bidderHomeTitle">
+        <div class="screen-heading home-heading">
+          <div><p class="kicker">الخميس، ٢٧ أغسطس</p><h1 id="bidderHomeTitle">مساء الخير، حمد 👋</h1><p>هناك ٣ مزادات تناسب متابعتك اليوم.</p></div>
+          <button class="primary-action desktop-only" type="button" data-nav-target="live"><span>●</span> ادخل البث الجاري</button>
+        </div>
+
+        <section class="live-orbit" aria-labelledby="liveOrbitTitle">
+          <div class="section-title compact"><div><p class="kicker live-kicker">● مباشر الآن</p><h2 id="liveOrbitTitle">من تتابعهم على الهواء</h2></div><button type="button" data-nav-target="explore">عرض الكل</button></div>
+          <div class="story-row">
+            <button class="live-story active" type="button" data-nav-target="live"><span class="story-ring"><span class="story-photo watch-story"></span><i>LIVE</i></span><b>دار الوقت</b></button>
+            <button class="live-story" type="button" data-nav-target="explore"><span class="story-ring"><span class="story-photo car-story"></span><i>LIVE</i></span><b>سيارات مسقط</b></button>
+            <button class="live-story" type="button" data-nav-target="explore"><span class="story-ring"><span class="story-photo jewel-story"></span><i>LIVE</i></span><b>بيت الجوهرة</b></button>
+            <button class="live-story muted" type="button" data-nav-target="explore"><span class="story-ring"><span class="story-photo camera-story"></span><em>20:30</em></span><b>عدسة</b></button>
+            <button class="live-story muted" type="button" data-nav-target="explore"><span class="story-ring"><span class="story-photo antique-story"></span><em>غدًا</em></span><b>تراث عُمان</b></button>
+          </div>
+        </section>
+
+        <div class="bidder-dashboard-grid">
+          <article class="featured-auction-card">
+            <img src="./og.png" alt="ساعة أوميغا في المزاد الجاري">
+            <div class="featured-shade"></div>
+            <div class="featured-top"><span class="live-badge"><i></i> مباشر</span><span class="viewer-badge">👁 ١٢٨</span></div>
+            <div class="featured-copy">
+              <span>الجولة ٢ من ٨ · دار الوقت</span>
+              <h2>أوميغا سيماستر<br>إصدار ٢٠٢٢</h2>
+              <div class="featured-price"><small>السعر الحالي</small><b><span data-current-price>٨٦٠٫٠٠٠</span> ر.ع.</b></div>
+              <button class="light-action" type="button" data-nav-target="live">دخول غرفة المزاد <span>←</span></button>
+            </div>
+            <div class="featured-timer"><small>تنتهي الجولة بعد</small><b data-timer>00:31</b></div>
+          </article>
+
+          <aside class="personal-rail">
+            <article class="pulse-card">
+              <div class="pulse-head"><span class="color-icon violet">◎</span><span><small>نشاطك هذا الأسبوع</small><b>أنت أكثر نشاطًا من ٧٢٪</b></span></div>
+              <div class="pulse-track"><i style="--value:72%"></i></div>
+              <div class="pulse-facts"><span><b>٦</b><small>قطع تابعتها</small></span><span><b>٣</b><small>مزادات دخلتها</small></span><span><b>١</b><small>فوز قيد الاستلام</small></span></div>
+            </article>
+            <article class="next-reminder">
+              <span class="color-icon blue">⏱</span>
+              <span><small>يبدأ بعد ٤٥ دقيقة</small><b>مزاد كاميرات كلاسيكية</b><em>أضفناه لتذكيراتك</em></span>
+              <button type="button" data-toast="سيصلك تنبيه قبل بدء المزاد في هذه المعاينة.">✓</button>
+            </article>
+            <article class="win-mini-card" data-nav-target="wins" tabindex="0" role="button">
+              <span class="color-icon gold">🏆</span><span><small>فوزك الأخير</small><b>كاميرا لايكا M6</b><em>جاهزة للاستلام من بوشر</em></span><span>←</span>
+            </article>
+          </aside>
+        </div>
+
+        <section class="category-section" aria-labelledby="categoryTitle">
+          <div class="section-title"><div><p class="kicker">استكشف بسرعة</p><h2 id="categoryTitle">ماذا يهمك اليوم؟</h2></div></div>
+          <div class="category-grid">
+            <button type="button" data-category-jump="watches"><span class="color-icon blue">⌚</span><b>ساعات</b><small>٨ قطع · ٢ مباشر</small></button>
+            <button type="button" data-category-jump="cars"><span class="color-icon coral">🚗</span><b>سيارات</b><small>٥ قطع · ١ مباشر</small></button>
+            <button type="button" data-category-jump="jewelry"><span class="color-icon gold">💍</span><b>مجوهرات</b><small>١٢ قطعة اليوم</small></button>
+            <button type="button" data-category-jump="antiques"><span class="color-icon mint">🏺</span><b>تحف</b><small>٦ قطع موثّقة</small></button>
+            <button type="button" data-category-jump="electronics"><span class="color-icon violet">📷</span><b>إلكترونيات</b><small>١٠ قطع قادمة</small></button>
+            <button type="button" data-category-jump="all"><span class="color-icon ink">✦</span><b>كل المعروضات</b><small>٢٤ قطعة متاحة</small></button>
+          </div>
+        </section>
+
+        <section class="recommendation-section" aria-labelledby="recommendedTitle">
+          <div class="section-title"><div><p class="kicker">مختارة لك</p><h2 id="recommendedTitle">قطع تستحق المتابعة</h2></div><button type="button" data-nav-target="explore">كل المعروضات</button></div>
+          <div class="product-row" id="homeProductRow"></div>
+        </section>
+      </section>
+
+      <section class="app-screen" data-screen="live" hidden aria-labelledby="liveTitle">
+        <div class="live-page-head">
+          <button class="back-link" type="button" data-nav-target="bidder-home">→ الرجوع</button>
+          <div><span class="live-badge"><i></i> مباشر</span><span>دار الوقت · ١٢٨ يشاهدون</span></div>
+          <button class="icon-action" type="button" data-toast="تمت مشاركة رابط المعاينة.">↗</button>
+        </div>
+        <div class="live-room-v2">
+          <div class="live-stage-v2">
+            <img id="liveStageImage" src="./og.png" alt="ساعة أوميغا سيماستر المعروضة الآن">
+            <div class="stage-vignette"></div>
+            <div class="stage-tools"><button type="button" aria-label="الصوت">🔊</button><button type="button" aria-label="ملء الشاشة">⛶</button></div>
+            <div class="host-pill"><span>س</span><span><small>يدير المزاد</small><b>سالم الرواحي <i>✓</i></b></span></div>
+            <div class="stage-lot-card"><small>القطعة الحالية · #MSQ-1042</small><b>أوميغا سيماستر — ٢٠٢٢</b><button type="button" data-open-dialog="lotDialog">التفاصيل</button></div>
+            <div class="stage-queue"><span>التالي</span><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=240&q=76" alt="القطعة التالية: كاميرا لايكا"><b>لايكا M6</b></div>
+          </div>
+
+          <aside class="bid-console">
+            <div class="lot-title-row"><div><p>الجولة ٢ من ٨ · ساعات فاخرة</p><h1 id="liveTitle">أوميغا سيماستر ٢٠٢٢</h1></div><button class="favorite-button" type="button" data-favorite aria-label="حفظ القطعة">♡</button></div>
+            <button class="condition-summary" type="button" data-open-dialog="lotDialog"><span class="color-icon mint">✓</span><span><b>حالة ممتازة · موثّقة</b><small>شاهد الصور والعيوب قبل المزايدة</small></span><span>←</span></button>
+
+            <div class="price-zone" id="currentPriceCard">
+              <div><small>السعر الحالي</small><strong><span data-current-price>٨٦٠٫٠٠٠</span> <em>ر.ع.</em></strong><p id="leaderStatus">المتصدر الآن <b data-leader>نورس_٧</b></p></div>
+              <div class="countdown-ring" id="timerCard"><small>الوقت</small><b data-timer>00:31</b><span>تمديد تلقائي آخر ١٠ ثوانٍ</span></div>
+            </div>
+
+            <div class="bid-zone">
+              <div class="bid-zone-title"><span><b>اختر قيمة الزيادة</b><small>لن نرسل شيئًا قبل التأكيد</small></span><span class="secure-label">🔒 عرض واضح</span></div>
+              <div class="bid-choice-grid">
+                <button class="bid-choice" type="button" data-bid="1000"><span>+ ١ ر.ع.</span><small>يصبح <b data-result-price="1000">٨٦١٫٠٠٠</b></small></button>
+                <button class="bid-choice recommended" type="button" data-bid="5000"><i>الأكثر استخدامًا</i><span>+ ٥ ر.ع.</span><small>يصبح <b data-result-price="5000">٨٦٥٫٠٠٠</b></small></button>
+                <button class="bid-choice" type="button" data-bid="10000"><span>+ ١٠ ر.ع.</span><small>يصبح <b data-result-price="10000">٨٧٠٫٠٠٠</b></small></button>
+              </div>
+              <p class="bid-honesty">هذه معاينة على جهازك؛ لا يوجد خصم أو دفع حقيقي.</p>
+            </div>
+
+            <div class="leader-podium">
+              <div class="podium-title"><span><b>المنافسة الآن</b><small>أعلى ٣ مزايدين</small></span><span class="your-rank" id="yourRank">ترتيبك: —</span></div>
+              <ol id="leaderboardList"></ol>
+            </div>
+
+            <div class="live-footer-actions"><button type="button" id="leaveAuctionButton" aria-pressed="false">متابعة كمشاهد</button><button type="button" data-toast="أبلغنا فريق المراجعة في هذه المعاينة.">الإبلاغ عن مشكلة</button></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="app-screen" data-screen="explore" hidden aria-labelledby="exploreTitle">
+        <div class="screen-heading explore-heading"><div><p class="kicker">السوق المباشر</p><h1 id="exploreTitle">استكشف المعروضات</h1><p>ابحث بحسب القطعة، الحالة، الموعد، أو المنظّم.</p></div><div class="catalog-count"><b id="catalogCount">٦</b><span>قطع ظاهرة</span></div></div>
+        <div class="explore-controls">
+          <label class="search-box"><span>⌕</span><input id="catalogSearch" type="search" placeholder="مثال: ساعة، سيارة، لايكا…" autocomplete="off"></label>
+          <select id="catalogSort" aria-label="ترتيب المعروضات"><option value="soon">الأقرب موعدًا</option><option value="interest">الأعلى اهتمامًا</option><option value="price-low">السعر الأقل</option></select>
+        </div>
+        <div class="filter-strip" id="categoryFilters">
+          <button class="active" type="button" data-category="all">✨ الكل</button>
+          <button type="button" data-category="watches">⌚ ساعات</button>
+          <button type="button" data-category="cars">🚗 سيارات</button>
+          <button type="button" data-category="jewelry">💍 مجوهرات</button>
+          <button type="button" data-category="antiques">🏺 تحف</button>
+          <button type="button" data-category="electronics">📷 إلكترونيات</button>
+        </div>
+        <div class="catalog-grid" id="catalogGrid"></div>
+        <div class="empty-state" id="catalogEmpty" hidden><span>⌕</span><h2>لم نجد قطعة بهذه المواصفات</h2><p>جرّب كلمة أقصر أو اعرض كل الأقسام.</p><button type="button" id="clearCatalog">مسح البحث</button></div>
+      </section>
+
+      <section class="app-screen" data-screen="wins" hidden aria-labelledby="winsTitle">
+        <div class="screen-heading"><div><p class="kicker">مشترياتك ومتابعتك</p><h1 id="winsTitle">فوزي ومزاداتي</h1><p>كل قطعة من العرض حتى الاستلام، دون رسائل ضائعة.</p></div></div>
+        <div class="wins-layout">
+          <article class="delivery-card">
+            <div class="delivery-media"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&q=84" alt="كاميرا لايكا M6 التي فاز بها المستخدم"><span>تم الفوز</span></div>
+            <div class="delivery-copy"><p>طلب #MZ-2084</p><h2>كاميرا لايكا M6</h2><div class="won-price"><small>السعر الفائز</small><b>٧٢٠٫٠٠٠ ر.ع.</b></div><div class="delivery-progress"><i class="done"></i><i class="done"></i><i class="active"></i><i></i></div><div class="delivery-labels"><span>فزت</span><span>تم التأكيد</span><span>اختر الاستلام</span><span>تم التسليم</span></div><button class="primary-action" type="button" data-open-dialog="deliveryDialog">اختيار طريقة الاستلام</button></div>
+          </article>
+          <aside class="watching-card"><div class="section-title compact"><div><h2>تتابعها الآن</h2><p>سنذكّرك قبل البداية.</p></div></div><div class="watch-row"><span class="thumb watch-story"></span><span><b>رولكس ديت جست ٢٠١٩</b><small>غدًا · ٨:٣٠ مساءً</small></span><button data-favorite class="is-favorite" aria-label="إزالة من المحفوظات">♥</button></div><div class="watch-row"><span class="thumb car-story"></span><span><b>بورشه 911 كاريرا</b><small>السبت · ٦:٠٠ مساءً</small></span><button data-favorite class="is-favorite" aria-label="إزالة من المحفوظات">♥</button></div></aside>
+        </div>
+      </section>
+
+      <section class="app-screen" data-screen="profile" hidden aria-labelledby="profileTitle">
+        <div class="profile-hero"><span class="profile-avatar">ح</span><div><p class="kicker">حسابك</p><h1 id="profileTitle">حمد المسقطي</h1><p id="profileRoleLabel">مزايد · مستوى التحقق مكتمل</p></div><span class="verified-pill">✓ موثّق</span></div>
+        <div class="profile-grid">
+          <section class="settings-panel"><div class="panel-heading"><span class="color-icon blue">👤</span><div><h2>بيانات الحساب</h2><p>تُستخدم للفوز والاستلام فقط.</p></div><button type="button" data-toast="تم فتح وضع التعديل التجريبي.">تعديل</button></div><div class="field-grid"><label><span>رقم الهاتف</span><input value="+968 9••• ••42" readonly></label><label><span>البريد الإلكتروني</span><input value="hamad@example.test" readonly></label><label><span>المنطقة</span><input value="بوشر، مسقط" readonly></label><label><span>الاسم الظاهر</span><input value="حمد_مسقط" readonly></label></div></section>
+          <section class="settings-panel"><div class="panel-heading"><span class="color-icon mint">🔔</span><div><h2>تنبيهاتك</h2><p>اختر ما يستحق مقاطعتك.</p></div></div><label class="switch-row"><span><b>بداية مزاد محفوظ</b><small>قبل الموعد بـ١٥ دقيقة</small></span><input type="checkbox" checked><i></i></label><label class="switch-row"><span><b>تجاوز عرضك</b><small>فور تغيّر المتصدر</small></span><input type="checkbox" checked><i></i></label><label class="switch-row"><span><b>اقتراحات أسبوعية</b><small>ملخص واحد كل خميس</small></span><input type="checkbox"><i></i></label></section>
+          <section class="settings-panel experience-panel"><div class="panel-heading"><span class="color-icon violet">⇄</span><div><h2>تبديل تجربة التطبيق</h2><p>انتقل بين المزايدة وتنظيم المزادات دون خلط القوائم.</p></div></div><button class="role-switch-row" type="button" data-open-gateway><span>👆</span><span><b>تجربة المزايد</b><small>اكتشاف، بث، مزايدة، وفوز</small></span><i>←</i></button><button class="role-switch-row" type="button" data-enter-role="partner"><span>🎥</span><span><b>تجربة المنظّم</b><small>مزادات، فريق، واشتراك</small></span><i>←</i></button></section>
+        </div>
+      </section>
+
+      <section class="app-screen" data-screen="partner-home" hidden aria-labelledby="partnerHomeTitle">
+        <div class="workspace-banner">
+          <div class="workspace-identity"><span class="workspace-logo">د</span><span><small>مساحة العمل</small><b>دار الوقت للمزادات</b><em>منظّم معتمد · مسقط</em></span></div>
+          <div class="workspace-plan"><span><small>خطة استوديو</small><b>٦ من ١٠ مقاعد</b></span><div class="seat-meter"><i style="--value:60%"></i></div><button type="button" data-nav-target="partner-team">إدارة</button></div>
+        </div>
+        <div class="screen-heading partner-heading"><div><p class="kicker">مركز التشغيل</p><h1 id="partnerHomeTitle">كل ما يحتاج قرارك اليوم</h1><p>ابدأ بالمزاد الأقرب، ثم الطلبات والفريق.</p></div><button class="primary-action" type="button" data-open-dialog="createAuctionDialog">＋ إنشاء مزاد</button></div>
+        <div class="operator-metrics">
+          <article><span class="color-icon mint">◔</span><small>مزادات هذا الشهر</small><b>١٢</b><em>+٣ عن الشهر الماضي</em></article>
+          <article><span class="color-icon gold">ر.ع.</span><small>قيمة البيع التجريبية</small><b>٨,٤٢٠</b><em>السعر الفائز، لا المدفوع</em></article>
+          <article><span class="color-icon blue">↗</span><small>نسبة بيع القطع</small><b>٨٧٪</b><em>٢٦ من ٣٠ قطعة</em></article>
+          <article><span class="color-icon coral">👥</span><small>مزايدون فريدون</small><b>١,٢٨٤</b><em>آخر ٣٠ يومًا</em></article>
+        </div>
+        <div class="partner-main-grid">
+          <article class="today-auction-card">
+            <div class="panel-heading"><div><p class="kicker live-kicker">● اليوم، ٨:٣٠ مساءً</p><h2>ساعات مختارة · ٨ قطع</h2><p>المضيف: سالم الرواحي</p></div><span class="readiness-score">٥/٦ جاهز</span></div>
+            <div class="auction-readiness">
+              <div class="readiness-image watch-story"><span>٨ قطع</span></div>
+              <div class="readiness-list"><p class="done"><i>✓</i><span><b>القطع والوصف</b><small>تمت مراجعة ٨ قطع</small></span></p><p class="done"><i>✓</i><span><b>زيادات المزايدة</b><small>١، ٥، ١٠ ر.ع.</small></span></p><p class="done"><i>✓</i><span><b>المضيف والفريق</b><small>سالم + مريم</small></span></p><p><i>!</i><span><b>اختبار الكاميرا</b><small>لم يكتمل بعد</small></span></p></div>
+            </div>
+            <div class="today-actions"><button class="secondary-action" type="button" data-open-dialog="cameraDialog">اختبار الأجهزة</button><button class="primary-action" type="button" data-nav-target="partner-control">فتح غرفة التحكم</button></div>
+          </article>
+          <aside class="decision-center"><div class="panel-heading"><div><h2>قرارات تنتظرك</h2><p>مرتبة حسب الوقت والأثر.</p></div><span class="count-badge">٣</span></div><button class="decision-row urgent" type="button" data-toast="فُتحت مراجعة قطعة الخنجر."><span class="color-icon coral">!</span><span><b>قطعة تحتاج اعتمادًا</b><small>خنجر فضة · قبل البث بـ٣ ساعات</small></span><em>الآن</em></button><button class="decision-row" type="button" data-nav-target="partner-team"><span class="color-icon blue">👤</span><span><b>دعوة فريق معلّقة</b><small>علي الشقصي · تجهيز وتسليم</small></span><em>اليوم</em></button><button class="decision-row" type="button" data-toast="فُتح طلب التسليم التجريبي."><span class="color-icon gold">📦</span><span><b>طلب فائز بلا موعد</b><small>كاميرا لايكا M6 · بوشر</small></span><em>منذ يوم</em></button></aside>
+        </div>
+        <div class="partner-lower-grid">
+          <article class="chart-card"><div class="panel-heading"><div><h2>الطلب خلال ٧ أيام</h2><p>المزايدون الفعليون، لا المشاهدات.</p></div><span class="trend-pill">↗ ١٨٪</span></div><div class="spark-bars"><i style="--h:34%"></i><i style="--h:47%"></i><i style="--h:41%"></i><i style="--h:68%"></i><i style="--h:57%"></i><i style="--h:78%"></i><i class="active" style="--h:92%"></i></div><div class="chart-labels"><span>الخميس</span><span>اليوم</span></div></article>
+          <article class="quick-action-card"><div class="panel-heading"><div><h2>ابدأ بسرعة</h2><p>أكثر الأعمال استخدامًا.</p></div></div><div class="operator-actions"><button type="button" data-open-dialog="createAuctionDialog"><span class="color-icon mint">＋</span><b>مزاد جديد</b></button><button type="button" data-nav-target="partner-catalog"><span class="color-icon blue">◫</span><b>إضافة قطعة</b></button><button type="button" data-nav-target="partner-team"><span class="color-icon violet">👥</span><b>دعوة شخص</b></button><button type="button" data-nav-target="partner-control"><span class="color-icon coral">🎥</span><b>غرفة التحكم</b></button></div></article>
+        </div>
+      </section>
+
+      <section class="app-screen studio-screen" data-screen="partner-control" hidden aria-labelledby="studioControlTitle">
+        <header class="studio-commandbar">
+          <div class="studio-command-copy">
+            <span class="studio-status live" id="studioStatus"><i></i><span id="studioStatusText">مباشر · المزايدة مفتوحة</span></span>
+            <h1 id="studioControlTitle">غرفة تحكم «ساعات مختارة»</h1>
+            <p>مكان خاص للمضيف والفريق؛ ما تغيّره هنا ينعكس فورًا في تجربة المزايد داخل هذه المعاينة.</p>
+          </div>
+          <div class="studio-command-actions">
+            <span class="studio-truth"><i></i> معاينة على هذا الجهاز</span>
+            <button class="secondary-action" type="button" data-open-dialog="cameraDialog">إعداد الكاميرا</button>
+            <button class="primary-action" type="button" id="studioStartPauseButton" data-studio-pause>إيقاف المزايدة مؤقتًا</button>
+          </div>
+        </header>
+
+        <nav class="studio-tabs" role="tablist" aria-label="أقسام غرفة التحكم">
+          <button class="active" type="button" role="tab" aria-selected="true" data-studio-tab="live"><span>●</span> البث والمزايدة</button>
+          <button type="button" role="tab" aria-selected="false" data-studio-tab="lots"><span>▦</span> ترتيب القطع <b>٤</b></button>
+          <button type="button" role="tab" aria-selected="false" data-studio-tab="people"><span>♙</span> المزايدون والفريق <b>٢٤</b></button>
+          <button type="button" role="tab" aria-selected="false" data-studio-tab="delivery"><span>◇</span> النتائج والتسليم <b>٣</b></button>
+        </nav>
+
+        <div class="studio-panel" data-studio-panel="live">
+          <div class="studio-live-grid">
+            <section class="studio-preview-card" aria-label="معاينة البث">
+              <div class="studio-preview">
+                <img id="studioLotImage" src="./og.png" alt="معاينة أوميغا سيماستر">
+                <div class="antique-story studio-antique-fallback" id="studioAntiqueFallback" hidden role="img" aria-label="قطعة تراثية"></div>
+                <video id="studioCameraVideo" data-camera-video autoplay muted playsinline></video>
+                <div class="studio-device-off" id="studioCameraPlaceholder" data-camera-placeholder><span>◉</span><b>لقطة المنتج الحالية</b><small>شغّل الكاميرا عند جاهزية المضيف</small></div>
+                <div class="studio-preview-top"><span><i></i> PROGRAM</span><span>1080p · ٣٦ms</span></div>
+                <div class="studio-preview-bottom"><span><small>على الهواء الآن</small><b id="studioLotTitle">أوميغا سيماستر — ٢٠٢٢</b></span><span><small>المشاهدون</small><b id="studioViewerCount">١٢٨</b></span></div>
+              </div>
+              <div class="studio-device-strip">
+                <button type="button" id="studioCameraButton" data-camera-toggle><span>▣</span> تشغيل الكاميرا</button>
+                <button type="button" data-toast="الميكروفون مضبوط على المضيف في هذه المعاينة."><span>◉</span> ميكروفون المضيف</button>
+                <button type="button" data-open-dialog="cameraDialog"><span>✦</span> الفلاتر والصورة</button>
+                <button type="button" data-toast="تخطيط المنتج يضع الصورة والسعر في مشهد واحد."><span>▤</span> تخطيط المشهد</button>
+              </div>
+            </section>
+
+            <aside class="studio-auction-deck">
+              <div class="studio-lot-identity"><span><small id="studioLotCode">#MSQ-1042 · القطعة ١ من ٤</small><b>لوحة إدارة الجولة</b></span><button type="button" data-open-dialog="lotDialog">تقرير القطعة</button></div>
+              <div class="studio-live-numbers">
+                <article class="price"><small>السعر الحالي</small><strong id="studioPrice">٨٦٠٫٠٠٠ ر.ع.</strong><span>أعلى مزايد: <b id="studioLeader">نورس_٧</b></span></article>
+                <article class="clock"><small>الوقت المتبقي</small><strong id="studioTimer">00:31</strong><span>إغلاق مرن آخر ١٠ ثوانٍ</span></article>
+              </div>
+              <div class="studio-round-actions">
+                <button type="button" id="studioExtendButton" data-studio-extend><span>＋٣٠</span><b>تمديد الوقت</b></button>
+                <button type="button" data-studio-pause><span>Ⅱ</span><b>إيقاف / استئناف</b></button>
+                <button class="danger" type="button" id="studioCloseButton" data-studio-close><span>✓</span><b>إغلاق وتثبيت</b></button>
+              </div>
+              <fieldset class="studio-increments"><legend>أزرار الزيادة الظاهرة للمزايدين</legend><label><input type="checkbox" value="1000" checked data-studio-increment><span>+١ ر.ع.</span></label><label><input type="checkbox" value="5000" checked data-studio-increment><span>+٥ ر.ع.</span></label><label><input type="checkbox" value="10000" checked data-studio-increment><span>+١٠ ر.ع.</span></label></fieldset>
+              <div class="studio-safety-note"><span>⌁</span><p><b>سجل غير قابل للمحو من الواجهة</b><small>لا يستطيع المضيف تعديل عرض مقبول أو تغيير الفائز بصمت.</small></p></div>
+            </aside>
+          </div>
+
+          <div class="studio-data-grid">
+            <section class="studio-queue-card"><div class="panel-heading"><div><h2>طابور القطع</h2><p>الجولة الحالية والتالية في مكان واحد.</p></div><button type="button" id="studioNextLotButton" data-studio-next>القطعة التالية ←</button></div><div class="studio-queue" id="studioQueue"></div></section>
+            <section class="studio-leaders-card"><div class="panel-heading"><div><h2>أعلى المزايدين</h2><p><b id="studioBidCount">٣</b> عروض مثبتة في الجولة.</p></div><span class="status-chip success">يتحدث لحظيًا</span></div><ol id="studioLeaderboard"></ol></section>
+            <section class="studio-activity-card"><div class="panel-heading"><div><h2>سجل الغرفة</h2><p>قرارات المضيف وأحداث الجولة.</p></div><span class="status-chip neutral">محلي</span></div><div class="studio-activity" id="studioActivity"></div></section>
+          </div>
+        </div>
+
+        <div class="studio-panel" data-studio-panel="lots" hidden>
+          <div class="studio-section-heading"><div><p class="kicker">RUNDOWN</p><h2>رتّب البث قبل أن تبدأ القطعة</h2><p>الجاهزية، سعر البداية، والصورة التي ستظهر للمشاهد.</p></div><button class="primary-action" type="button" data-open-dialog="addLotDialog">＋ إضافة قطعة</button></div>
+          <div class="rundown-board"><article><span class="rundown-handle">⠿</span><span class="rundown-index">01</span><span class="thumb watch-story"></span><span><b>أوميغا سيماستر — ٢٠٢٢</b><small>#MSQ-1042 · تقرير الحالة مكتمل</small></span><strong>٨٢٠٫٠٠٠ ر.ع.</strong><em class="status-chip success">على الهواء</em><button type="button" data-toast="القطعة الحالية لا تُعدّل أثناء فتح المزايدة.">•••</button></article><article><span class="rundown-handle">⠿</span><span class="rundown-index">02</span><span class="thumb camera-story"></span><span><b>كاميرا لايكا M6 كلاسيكية</b><small>#MSQ-1043 · ٦ صور وتقرير فحص</small></span><strong>٧٢٠٫٠٠٠ ر.ع.</strong><em class="status-chip neutral">جاهزة</em><button type="button" data-toast="فُتحت إعدادات القطعة التالية.">•••</button></article><article><span class="rundown-handle">⠿</span><span class="rundown-index">03</span><span class="thumb jewel-story"></span><span><b>سوار ذهب عيار ٢١</b><small>#MSQ-1044 · الوزن موثق</small></span><strong>١٩٥٫٠٠٠ ر.ع.</strong><em class="status-chip neutral">جاهزة</em><button type="button" data-toast="فُتحت إعدادات القطعة.">•••</button></article><article class="needs-review"><span class="rundown-handle">⠿</span><span class="rundown-index">04</span><span class="thumb antique-story"></span><span><b>خنجر عُماني فضة</b><small>#MSQ-1045 · صورة العيب مطلوبة</small></span><strong>٤٢٠٫٠٠٠ ر.ع.</strong><em class="status-chip warning">مراجعة</em><button type="button" data-toast="فُتحت مراجعة تقرير الحالة.">•••</button></article></div>
+        </div>
+
+        <div class="studio-panel" data-studio-panel="people" hidden>
+          <div class="studio-people-grid"><section><div class="studio-section-heading"><div><p class="kicker">فريق الغرفة</p><h2>من يستطيع فعل ماذا؟</h2><p>صلاحيات واضحة، لا كلمة مرور مشتركة.</p></div><button class="secondary-action" type="button" data-open-dialog="inviteDialog">دعوة شخص</button></div><div class="room-team"><article><span class="team-avatar host">س</span><span><b>سالم الرواحي</b><small>المضيف · كاميرا وصوت وإغلاق الجولة</small></span><em>متصل</em></article><article><span class="team-avatar">م</span><span><b>مريم الحارثية</b><small>مديرة القطع · ترتيب وتجهيز فقط</small></span><em>متصلة</em></article><article><span class="team-avatar">ع</span><span><b>علي الشقصي</b><small>التسليم · يرى النتائج بعد الإغلاق</small></span><em class="muted">خارج الغرفة</em></article></div></section><section class="bidder-ops"><div class="panel-heading"><div><h2>حالة المزايدين</h2><p>لا توجد دردشة؛ النشاط عروض رقمية فقط.</p></div></div><div class="bidder-health"><article><b>٢٤</b><small>مؤهلون للمزايدة</small></article><article><b>١٠٤</b><small>مشاهدون فقط</small></article><article><b>٠</b><small>حسابات موقوفة</small></article></div><div class="operator-rule"><span class="color-icon mint">✓</span><span><b>إبراز أعلى ٣ مزايدين</b><small>يظهر اللقب والسعر فقط؛ لا تظهر البيانات الشخصية.</small></span><label class="mini-switch"><input type="checkbox" checked><i></i></label></div><div class="operator-rule"><span class="color-icon blue">◎</span><span><b>وضع المشاهدة بعد الانسحاب</b><small>يبقى الشخص في الغرفة دون قبول عروض جديدة.</small></span><label class="mini-switch"><input type="checkbox" checked><i></i></label></div></section></div>
+        </div>
+
+        <div class="studio-panel" data-studio-panel="delivery" hidden>
+          <div class="studio-section-heading"><div><p class="kicker">بعد المطرقة</p><h2>من النتيجة إلى الاستلام</h2><p>كل فائز له حالة واضحة ومهمة تالية.</p></div><button class="secondary-action" type="button" data-toast="سيُتاح التصدير بعد ربط خادم الإنتاج.">تصدير التقرير</button></div><div class="settlement-board"><article><span class="settlement-state done">✓</span><span class="thumb camera-story"></span><span><small>#MZ-2084 · انتهى أمس</small><b>كاميرا لايكا M6</b><em>حمد_مسقط · ٧٢٠٫٠٠٠ ر.ع.</em></span><span><small>الحالة</small><b>بانتظار اختيار الاستلام</b></span><button type="button" data-toast="فُتح طلب الفائز التجريبي.">فتح الطلب</button></article><article><span class="settlement-state">◷</span><span class="thumb jewel-story"></span><span><small>#MZ-2079 · منذ يومين</small><b>سوار ذهب عيار ٢١</b><em>مها_٢٤ · ٢٣٠٫٠٠٠ ر.ع.</em></span><span><small>الحالة</small><b>موعد الاستلام مؤكد</b></span><button type="button" data-toast="فُتح سجل التسليم التجريبي.">التفاصيل</button></article><article><span class="settlement-state risk">!</span><span class="thumb antique-story"></span><span><small>#MZ-2068 · منذ ٤ أيام</small><b>خنجر فضة عُماني</b><em>مسقطي · ٤٨٠٫٠٠٠ ر.ع.</em></span><span><small>الحالة</small><b>تحتاج متابعة بشرية</b></span><button type="button" data-toast="فُتحت حالة المتابعة التجريبية.">معالجة</button></article></div>
+        </div>
+      </section>
+
+      <section class="app-screen" data-screen="partner-auctions" hidden aria-labelledby="partnerAuctionsTitle">
+        <div class="screen-heading"><div><p class="kicker">غرفة التشغيل</p><h1 id="partnerAuctionsTitle">مزاداتي</h1><p>المباشر والقادم والمسودات في قائمة واحدة مفهومة.</p></div><button class="primary-action" type="button" data-open-dialog="createAuctionDialog">＋ إنشاء مزاد</button></div>
+        <div class="status-tabs"><button class="active" type="button">الكل <b>٤</b></button><button type="button">مباشر <b>١</b></button><button type="button">قادم <b>٢</b></button><button type="button">مسودات <b id="draftCount">١</b></button></div>
+        <div class="auction-list" id="partnerAuctionList">
+          <article class="auction-list-row live-row"><span class="auction-date"><b>الآن</b><small>مباشر</small></span><span class="auction-list-media watch-story"><i></i></span><span class="auction-list-copy"><small>الجولة ٢ من ٨</small><b>ساعات مختارة</b><em>١٢٨ مشاهدًا · ٢٤ مزايدًا</em></span><span class="auction-list-value"><small>السعر الحالي</small><b>٨٦٠٫٠٠٠ ر.ع.</b></span><button type="button" data-nav-target="partner-control">غرفة التحكم</button></article>
+          <article class="auction-list-row"><span class="auction-date"><b>٢٧</b><small>أغسطس · ٨:٣٠</small></span><span class="auction-list-media camera-story"></span><span class="auction-list-copy"><small>٦ قطع · جاهزية ١٠٠٪</small><b>كاميرات كلاسيكية</b><em>المضيف: مريم الحارثية</em></span><span class="auction-list-value"><small>المتابعون</small><b>٨٤</b></span><button type="button" data-toast="فُتحت صفحة التجهيز التجريبية.">التجهيز</button></article>
+          <article class="auction-list-row"><span class="auction-date"><b>٣٠</b><small>أغسطس · ٦:٠٠</small></span><span class="auction-list-media jewel-story"></span><span class="auction-list-copy"><small>١٢ قطعة · جاهزية ٧٥٪</small><b>ذهب ومجوهرات</b><em>ينقص تقرير قطعتين</em></span><span class="auction-list-value"><small>المتابعون</small><b>١٤٢</b></span><button type="button" data-toast="فُتحت صفحة التجهيز التجريبية.">إكمال</button></article>
+          <article class="auction-list-row draft-row"><span class="auction-date"><b>—</b><small>مسودة</small></span><span class="auction-list-media antique-story"></span><span class="auction-list-copy"><small>٣ قطع مضافة</small><b>تحف عُمانية</b><em>لم يُحدد الموعد أو المضيف</em></span><span class="auction-list-value"><small>الحالة</small><b>غير منشور</b></span><button type="button" data-open-dialog="createAuctionDialog">متابعة</button></article>
+        </div>
+      </section>
+
+      <section class="app-screen" data-screen="partner-catalog" hidden aria-labelledby="partnerCatalogTitle">
+        <div class="screen-heading"><div><p class="kicker">مخزون المزاد</p><h1 id="partnerCatalogTitle">القطع والكتالوج</h1><p>اعرف ما هو جاهز وما يحتاج صورة أو تقريرًا قبل النشر.</p></div><button class="primary-action" type="button" data-open-dialog="addLotDialog">＋ إضافة قطعة</button></div>
+        <div class="catalog-health"><div><span class="color-icon mint">✓</span><span><b>١٨ قطعة جاهزة</b><small>يمكن إضافتها إلى أي مزاد</small></span></div><div><span class="color-icon gold">!</span><span><b>٤ تحتاج مراجعة</b><small>صور أو حالة أو مستند</small></span></div><div><span class="color-icon blue">◷</span><span><b>٦ مؤرشفة</b><small>تم بيعها أو إيقافها</small></span></div></div>
+        <div class="partner-catalog-grid" id="partnerCatalogGrid"></div>
+      </section>
+
+      <section class="app-screen" data-screen="partner-team" hidden aria-labelledby="partnerTeamTitle">
+        <div class="screen-heading"><div><p class="kicker">الحساب والاشتراك</p><h1 id="partnerTeamTitle">الفريق والخطة</h1><p>كل مقعد له شخص ودور ونطاق واضح.</p></div><button class="primary-action" type="button" data-open-dialog="inviteDialog">＋ دعوة شخص</button></div>
+        <div class="plan-overview">
+          <div><span class="plan-badge">STUDIO</span><h2>خطة استوديو · ١٠ مقاعد</h2><p>٦ مستخدمة، ٢ دعوة معلّقة، و٢ متاحة.</p><div class="seat-blocks" id="seatBlocks"></div></div>
+          <div class="plan-actions"><span><small>حالة الاشتراك</small><b>نشط بموافقة المالك</b></span><button class="secondary-action" type="button" data-open-dialog="plansDialog">مقارنة الخطط</button></div>
+        </div>
+        <div class="team-table-card"><div class="panel-heading"><div><h2>أعضاء مساحة العمل</h2><p>الصلاحيات تطبّق حسب الدور والمزاد.</p></div></div><div class="responsive-table"><table><thead><tr><th>الشخص</th><th>الدور</th><th>الوصول</th><th>آخر نشاط</th><th></th></tr></thead><tbody id="teamTable"><tr><td><span class="member-cell"><i class="avatar-teal">ع</i><span><b>عبدالله الهنائي</b><small>مالك الحساب</small></span></span></td><td>مدير</td><td><span class="status-chip success">كل المساحة</span></td><td>الآن</td><td><button aria-label="خيارات عبدالله">•••</button></td></tr><tr><td><span class="member-cell"><i class="avatar-coral">س</i><span><b>سالم الرواحي</b><small>مباشر الآن</small></span></span></td><td>مضيف مزاد</td><td>مزاد الساعات</td><td>الآن</td><td><button aria-label="خيارات سالم">•••</button></td></tr><tr><td><span class="member-cell"><i class="avatar-blue">م</i><span><b>مريم الحارثية</b><small>إدارة المحتوى</small></span></span></td><td>مديرة كتالوج</td><td>كل القطع</td><td>منذ ساعة</td><td><button aria-label="خيارات مريم">•••</button></td></tr><tr><td><span class="member-cell"><i class="avatar-gold">ع</i><span><b>علي الشقصي</b><small>دعوة معلّقة</small></span></span></td><td>تجهيز وتسليم</td><td><span class="status-chip warning">لم ينضم</span></td><td>—</td><td><button aria-label="خيارات علي">•••</button></td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="app-screen" data-screen="owner-home" hidden aria-labelledby="ownerHomeTitle">
+        <div class="owner-identity"><span class="owner-crown">◆</span><span><small>ملكية المنصة</small><b>MAZQAT Control</b></span><span class="private-label">خاص بالمالك</span></div>
+        <div class="screen-heading"><div><p class="kicker">شبكة المنظّمين</p><h1 id="ownerHomeTitle">المنصة في لقطة واحدة</h1><p>الموافقات أولًا، ثم الاشتراكات والتشغيل والمخاطر.</p></div><button class="primary-action" type="button" data-open-dialog="newPartnerDialog">＋ إنشاء حساب منظّم</button></div>
+        <div class="owner-metrics">
+          <article><span class="color-icon mint">◆</span><small>منظّمون نشطون</small><b>٢٤</b><em>من أصل ٢٨ حسابًا</em></article>
+          <article><span class="color-icon gold">ر.ع.</span><small>اشتراكات تجريبية</small><b>١,٨٤٠</b><em>بيانات عرض وليست محاسبة</em></article>
+          <article><span class="color-icon blue">●</span><small>مزادات جارية</small><b>٤</b><em>٣ مستقرة · ١ تحت المتابعة</em></article>
+          <article><span class="color-icon coral">!</span><small>تحتاج قرارك</small><b id="ownerDecisionCount">٣</b><em>طلبان + تنبيه تشغيل</em></article>
+        </div>
+        <div class="owner-grid">
+          <section class="approval-card"><div class="panel-heading"><div><h2>طلبات الانضمام</h2><p>لا يبدأ أي منظّم قبل موافقتك.</p></div><button type="button" data-nav-target="owner-partners">كل الطلبات</button></div><div id="approvalList"><article class="approval-row" data-approval="souq"><span class="company-avatar teal">س</span><span><b>سوق مطرح للمقتنيات</b><small>شركة · مسقط · طلب خطة ١٠ مقاعد</small></span><em>منذ ساعتين</em><div><button class="reject-button" type="button" data-reject-partner="souq">رفض</button><button class="approve-button" type="button" data-approve-partner="souq">مراجعة وموافقة</button></div></article><article class="approval-row" data-approval="nizwa"><span class="company-avatar gold">ن</span><span><b>نوادر نزوى</b><small>فرد · الداخلية · طلب خطة ٤ مقاعد</small></span><em>أمس</em><div><button class="reject-button" type="button" data-reject-partner="nizwa">رفض</button><button class="approve-button" type="button" data-approve-partner="nizwa">مراجعة وموافقة</button></div></article></div></section>
+          <section class="network-live-card"><div class="panel-heading"><div><h2>تشغيل الشبكة الآن</h2><p>٤ غرف بث و٣٨٦ مشاهدًا.</p></div><span class="status-chip success">مستقر</span></div><div class="network-room"><span class="room-dot live"></span><span><b>دار الوقت</b><small>ساعات مختارة · ١٢٨ مشاهدًا</small></span><em>٨٦٠ ر.ع.</em></div><div class="network-room"><span class="room-dot live"></span><span><b>سيارات مسقط</b><small>سيارات كلاسيكية · ١٦٤ مشاهدًا</small></span><em>١٢,٤٠٠ ر.ع.</em></div><div class="network-room warning"><span class="room-dot"></span><span><b>بيت الجوهرة</b><small>تذبذب في اتصال المضيف</small></span><em>مراجعة</em></div><div class="network-room"><span class="room-dot live"></span><span><b>عدسة</b><small>كاميرات · ٥٢ مشاهدًا</small></span><em>٣٤٠ ر.ع.</em></div></section>
+        </div>
+        <div class="owner-lower-grid"><section class="subscription-mix"><div class="panel-heading"><div><h2>توزيع الخطط</h2><p>المقاعد المتعاقد عليها، لا الحسابات المسجلة.</p></div></div><div class="plan-mix-row"><span><i class="plan-color starter"></i><b>منظّم · ٤ مقاعد</b></span><div><i style="--value:46%"></i></div><em>١١</em></div><div class="plan-mix-row"><span><i class="plan-color studio"></i><b>استوديو · ١٠ مقاعد</b></span><div><i style="--value:38%"></i></div><em>٩</em></div><div class="plan-mix-row"><span><i class="plan-color network"></i><b>شبكة · ٥٠ مقعدًا</b></span><div><i style="--value:16%"></i></div><em>٤</em></div></section><section class="risk-feed"><div class="panel-heading"><div><h2>تنبيهات تحتاج إنسانًا</h2><p>لا تُغلق تلقائيًا.</p></div></div><button type="button" data-toast="فُتح سجل انقطاع البث."><span class="color-icon coral">!</span><span><b>انقطع بث منظّم مرتين</b><small>بيت الجوهرة · خلال ٣٠ دقيقة</small></span><em>عالي</em></button><button type="button" data-toast="فُتحت مراجعة حد الخطة."><span class="color-icon gold">↑</span><span><b>حساب تجاوز ٩٠٪ من المقاعد</b><small>دار السيارات · ٤٦ من ٥٠</small></span><em>متوسط</em></button></section></div>
+      </section>
+
+      <section class="app-screen" data-screen="owner-partners" hidden aria-labelledby="ownerPartnersTitle">
+        <div class="screen-heading"><div><p class="kicker">الحسابات والموافقات</p><h1 id="ownerPartnersTitle">المنظّمون</h1><p>فعّل، جمّد، غيّر الخطة، أو راجع سجل أي حساب.</p></div><button class="primary-action" type="button" data-open-dialog="newPartnerDialog">＋ حساب منظّم</button></div>
+        <div class="partner-directory-toolbar"><label class="search-box"><span>⌕</span><input type="search" placeholder="ابحث باسم المنظّم أو المحافظة"></label><div class="status-tabs compact-tabs"><button class="active">الكل ٢٨</button><button>نشط ٢٤</button><button>بانتظار الموافقة ٢</button><button>موقوف ٢</button></div></div>
+        <div class="partner-directory"><article><span class="company-avatar teal">د</span><span><small>منظّم معتمد</small><b>دار الوقت للمزادات</b><em>مسقط · استوديو ١٠ · ٦ مقاعد مستخدمة</em></span><div class="directory-stats"><span><small>هذا الشهر</small><b>١٢ مزادًا</b></span><span><small>قيمة البيع</small><b>٨,٤٢٠ ر.ع.</b></span></div><span class="status-chip success">نشط</span><button type="button" data-owner-partner="dar-alwaqt">فتح الحساب</button></article><article><span class="company-avatar coral">س</span><span><small>منظّم معتمد</small><b>سيارات مسقط</b><em>مسقط · شبكة ٥٠ · ٤٦ مقعدًا</em></span><div class="directory-stats"><span><small>هذا الشهر</small><b>٨ مزادات</b></span><span><small>قيمة البيع</small><b>٦٢,٣٠٠ ر.ع.</b></span></div><span class="status-chip warning">قرب الحد</span><button type="button" data-owner-partner="muscat-cars">فتح الحساب</button></article><article><span class="company-avatar blue">ب</span><span><small>بانتظار المراجعة</small><b>بيت الجوهرة</b><em>السيب · منظّم ٤ · لم يُفعّل</em></span><div class="directory-stats"><span><small>المستندات</small><b>٣ من ٤</b></span><span><small>منذ</small><b>يومين</b></span></div><span class="status-chip neutral">مراجعة</span><button type="button" data-owner-partner="jewel-house">مراجعة</button></article></div>
+      </section>
+
+      <section class="app-screen" data-screen="owner-plans" hidden aria-labelledby="ownerPlansTitle">
+        <div class="screen-heading"><div><p class="kicker">الاشتراك والحدود</p><h1 id="ownerPlansTitle">الخطط والصلاحيات</h1><p>أنت تحدد من يبيع، كم مقعدًا يملك، وما الذي يراه كل دور.</p></div><button class="primary-action" type="button" data-toast="أُضيفت مسودة خطة تجريبية.">＋ خطة مخصصة</button></div>
+        <div class="owner-plan-grid">
+          <article class="owner-plan-card starter"><span class="plan-badge">STARTER</span><h2>منظّم</h2><b>٤ مقاعد</b><p>لفرد أو فريق صغير يبدأ مزادات محدودة.</p><ul><li>مضيف واحد في الوقت نفسه</li><li>كتالوج ومزادات أساسية</li><li>تقارير تشغيل شهرية</li></ul><button type="button" data-toast="فُتحت إعدادات خطة منظّم.">تعديل الخطة</button></article>
+          <article class="owner-plan-card studio featured"><span class="popular-label">الأكثر استخدامًا</span><span class="plan-badge">STUDIO</span><h2>استوديو</h2><b>١٠ مقاعد</b><p>لفريق يدير أكثر من مزاد وكتالوج متنامٍ.</p><ul><li>مضيفان متزامنان</li><li>صلاحيات فريق مفصلة</li><li>تحليلات وتحويل الطلب</li></ul><button type="button" data-toast="فُتحت إعدادات خطة استوديو.">تعديل الخطة</button></article>
+          <article class="owner-plan-card network"><span class="plan-badge">NETWORK</span><h2>شبكة</h2><b>٥٠ مقعدًا</b><p>لفروع متعددة أو دار مزادات كبيرة.</p><ul><li>مساحات وفروع متعددة</li><li>تقارير موحدة وتصدير</li><li>مدير نجاح مخصص لاحقًا</li></ul><button type="button" data-toast="فُتحت إعدادات خطة شبكة.">تعديل الخطة</button></article>
+        </div>
+        <section class="entitlement-card"><div class="panel-heading"><div><h2>سياسة التفعيل</h2><p>الاشتراك لا يمنح صلاحية البيع تلقائيًا.</p></div><span class="status-chip success">مفعّلة</span></div><div class="entitlement-flow"><span><i>١</i><b>طلب الحساب</b><small>بيانات النشاط والفريق</small></span><span>←</span><span><i>٢</i><b>مراجعة المالك</b><small>الهوية والنشاط والخطة</small></span><span>←</span><span><i>٣</i><b>تفعيل الاشتراك</b><small>المقاعد والصلاحيات</small></span><span>←</span><span><i>٤</i><b>اعتماد أول مزاد</b><small>قبل البث الحقيقي</small></span></div></section>
+      </section>
+
+      <section class="app-screen" data-screen="owner-audit" hidden aria-labelledby="ownerAuditTitle">
+        <div class="screen-heading"><div><p class="kicker">الشفافية والتدقيق</p><h1 id="ownerAuditTitle">سجل المنصة</h1><p>كل موافقة وتغيير خطة وإيقاف مزاد له صاحب ووقت وسبب.</p></div></div>
+        <div class="audit-timeline" id="auditTimeline"><article><i class="mint-dot"></i><span><b>تم اعتماد منظّم جديد</b><small>عبدالله الهنائي وافق على «دار المقتنيات»</small></span><time>اليوم · ١١:٤٢</time></article><article><i class="blue-dot"></i><span><b>تغيير خطة حساب</b><small>سيارات مسقط: استوديو ← شبكة</small></span><time>اليوم · ٠٩:١٥</time></article><article><i class="coral-dot"></i><span><b>إيقاف مزاد مؤقتًا</b><small>انقطاع بث بيت الجوهرة · بواسطة فريق العمليات</small></span><time>أمس · ٢٠:٣١</time></article><article><i class="gold-dot"></i><span><b>تعديل صلاحية عضو</b><small>مريم الحارثية: كتالوج ← مديرة مساحة</small></span><time>أمس · ١٥:٠٨</time></article></div>
+      </section>
+    </main>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="التنقل على الهاتف"></nav>
   </div>
 
-  <main id="main-content" class="app-main" tabindex="-1">
-    <section class="view active" data-view-panel="discover" aria-labelledby="discoverTitle">
-      <div class="discover-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">⚡ مزادات مباشرة من مسقط</p>
-          <h1 id="discoverTitle">القطعة التي تريدها.<br><span>واللحظة التي تحسمها.</span></h1>
-          <p>شاهد القطعة مباشرة، اعرف السعر قبل كل عرض، ونافس في جولة واضحة لا تُحسم بسرعة الشبكة.</p>
-          <div class="hero-actions">
-            <button class="primary-button" type="button" data-view="live"><i class="live-pip"></i> ادخل المزاد الجاري</button>
-            <button class="secondary-button" type="button" data-view="lots">تصفح كل المعروضات</button>
-          </div>
-          <div class="hero-proof"><span><b>👀 ١٢٨</b> يشاهدون الآن</span><span><b>✅ ٢٤</b> مزايدًا موثقًا</span><span><b>🎁 ٨</b> قطع في البث</span></div>
-        </div>
-        <div class="hero-visual" aria-label="بطاقة مزاد مسقط">
-          <img src="./og.png" alt="ساعة فاخرة على منصة مزاد مسقط" fetchpriority="high">
-          <div class="floating-price"><small>السعر الحالي</small><b><span data-current-price>٨٦٠.٠٠٠</span> ر.ع.</b></div>
-          <div class="floating-live"><i></i> مباشر</div>
-        </div>
-      </div>
+  <dialog class="app-dialog form-dialog" id="partnerAccessDialog" aria-labelledby="partnerAccessTitle"><form id="partnerAccessForm"><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><span class="dialog-symbol mint-symbol">🎥</span><p class="kicker">مساحة المنظّم</p><h2 id="partnerAccessTitle">ادخل بدعوة أو اطلب حسابًا</h2><label><span>رمز التفعيل</span><input name="activation" placeholder="مثال: MZ-STUDIO" autocomplete="off"></label><button class="primary-action full" type="submit">دخول مساحة العمل</button><button class="secondary-action full" type="button" data-partner-demo>تجربة حساب منظّم جاهز</button><button class="owner-access" type="button" data-open-dialog="partnerApplicationDialog">ليس لدي حساب — طلب اشتراك</button><p class="dialog-note">كل شخص يدخل بحسابه ومقعده؛ لا نبيع كلمة مرور مشتركة.</p></form></dialog>
 
-      <section class="auction-categories" aria-labelledby="categoryTitle">
-        <div class="section-heading compact-heading"><div><p class="eyebrow">استكشف بسرعة</p><h2 id="categoryTitle">أقسام المعروضات</h2></div><button type="button" data-view="lots">عرض الكل <span>←</span></button></div>
-        <div class="auction-category-grid">
-          <button type="button" data-category-link="watches"><span class="category-emoji teal">⌚</span><b>ساعات</b><small>٨ قطع</small></button>
-          <button type="button" data-category-link="cars"><span class="category-emoji blue">🚗</span><b>سيارات</b><small>٥ قطع</small></button>
-          <button type="button" data-category-link="jewelry"><span class="category-emoji gold">💍</span><b>مجوهرات</b><small>١٢ قطعة</small></button>
-          <button type="button" data-category-link="antiques"><span class="category-emoji coral">🏺</span><b>تحف</b><small>٦ قطع</small></button>
-          <button type="button" data-category-link="electronics"><span class="category-emoji violet">📷</span><b>إلكترونيات</b><small>١٠ قطع</small></button>
-          <button type="button" data-category-link="all"><span class="category-emoji mint">✨</span><b>الكل</b><small>٢٤ متاحة</small></button>
-        </div>
-      </section>
+  <dialog class="app-dialog form-dialog" id="partnerApplicationDialog" aria-labelledby="partnerApplicationTitle"><form id="partnerApplicationForm"><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><p class="kicker">طلب يخضع للموافقة</p><h2 id="partnerApplicationTitle">عرّفنا بمساحة المزاد</h2><label><span>اسم النشاط</span><input name="business" required placeholder="اسم النشاط أو دار المزادات"></label><label><span>وسيلة التواصل</span><input name="contact" required placeholder="هاتف أو بريد للعمل"></label><label><span>حجم الفريق المتوقع</span><select name="team"><option>حتى ٤ أشخاص</option><option>حتى ١٠ أشخاص</option><option>حتى ٥٠ شخصًا</option></select></label><button class="primary-action full" type="submit">إرسال طلب تجريبي</button><p class="dialog-note">في الإنتاج يصل الطلب إلى مالك المنصة، ولا يبدأ البيع قبل اعتماد النشاط والخطة.</p></form></dialog>
 
-      <div class="section-heading"><div><p class="eyebrow">🔴 يحدث الآن</p><h2>اختر مزادًا حيًا</h2></div><button type="button" data-view="live">عرض غرفة المزاد <span>←</span></button></div>
-      <div class="live-auction-grid">
-        <article class="live-card featured-card">
-          <div class="card-media watch-photo"><span class="live-label"><i></i> مباشر</span><span class="viewer-label">◉ ١٢٨</span><div class="card-countdown"><small>الجولة تنتهي بعد</small><b data-timer>00:31</b></div></div>
-          <div class="card-body"><p>ساعات فاخرة · الجولة ٢/٨</p><h3>أوميغا سيماستر — إصدار ٢٠٢٢</h3><div><span><small>السعر الحالي</small><b><span data-current-price>٨٦٠.٠٠٠</span> ر.ع.</b></span><button type="button" data-view="live">انضم الآن</button></div></div>
-        </article>
-        <article class="live-card">
-          <div class="card-media car-photo"><span class="scheduled-label">بعد ١٨ دقيقة</span><span class="interest-label">♥ ٧٤ مهتمًا</span></div>
-          <div class="card-body"><p>سيارات كلاسيكية · ٥ قطع</p><h3>أمسية السيارات الكلاسيكية</h3><div><span><small>يبدأ من</small><b>٣٬٨٠٠ ر.ع.</b></span><button type="button" data-view="lots">التفاصيل</button></div></div>
-        </article>
-        <article class="live-card">
-          <div class="card-media jewel-photo"><span class="scheduled-label">الخميس · ٨:٣٠ م</span><span class="interest-label">♥ ١١٣ مهتمًا</span></div>
-          <div class="card-body"><p>مجوهرات · ١٢ قطعة</p><h3>مختارات ذهبية موثّقة</h3><div><span><small>يبدأ من</small><b>١٢٠ ر.ع.</b></span><button type="button" data-view="lots">التفاصيل</button></div></div>
-        </article>
-      </div>
+  <dialog class="app-dialog info-dialog" id="previewDialog" aria-labelledby="previewTitle"><form method="dialog"><button class="dialog-close" value="close" aria-label="إغلاق">×</button><span class="dialog-symbol">i</span><p class="kicker">حقيقة النسخة</p><h2 id="previewTitle">تجربة المنتج، لا سوق حقيقي</h2><p>التصفح والمزايدة وإدارة الخطط تعمل كتجربة داخل جهازك. لا حسابات موثقة، لا بث عام، لا دفع، ولا بيانات مشتركة بين الأجهزة في هذا الرابط.</p><ul class="check-list"><li>✓ يمكنك تجربة رحلة المزايد كاملة</li><li>✓ يمكنك تجربة المنظّم والمالك والخطط</li><li>✓ الكاميرا — إن سمحت — تبقى معاينة محلية</li><li>— الإنتاج يحتاج خدمات وهوية ودفعًا ومراجعة قانونية</li></ul><button class="primary-action full" value="close">فهمت</button></form></dialog>
 
-      <section class="trust-strip" aria-label="كيف تزايد بثقة">
-        <div><i>📹</i><span><b>شاهد الحالة مباشرة</b><small>فيديو، صور، وعيوب موضحة قبل العرض.</small></span></div>
-        <div><i>⚡</i><span><b>اعرف الناتج قبل الضغط</b><small>كل زر يبيّن السعر الذي ستصل إليه.</small></span></div>
-        <div><i>📦</i><span><b>استلم بتنسيق خاص</b><small>الفائز يستلم رسالة وتفاصيل تسليم خاصة.</small></span></div>
-      </section>
-    </section>
+  <dialog class="app-dialog bid-dialog" id="bidDialog" aria-labelledby="bidDialogTitle"><form method="dialog"><button class="dialog-close" value="cancel" aria-label="إلغاء">×</button><span class="dialog-symbol mint-symbol">↑</span><p class="kicker">خطوة تأكيد واحدة</p><h2 id="bidDialogTitle">تأكيد المزايدة؟</h2><div class="bid-confirm-box"><span><small>قيمة الزيادة</small><b id="confirmIncrement">+٥ ر.ع.</b></span><span><small>السعر بعد العرض</small><strong id="confirmPrice">٨٦٥٫٠٠٠ ر.ع.</strong></span></div><p class="dialog-note">لن نسجل العرض مرتين، ولن نرسله تلقائيًا إذا انقطع الاتصال.</p><button class="primary-action full" type="button" id="confirmBidButton">تأكيد وإرسال العرض</button><button class="secondary-action full" value="cancel">العودة</button></form></dialog>
 
-    <section class="view live-view" data-view-panel="live" aria-labelledby="auctionTitle" hidden>
-      <div class="live-toolbar">
-        <button class="back-button" type="button" data-view="discover"><span>→</span> كل المزادات</button>
-        <div class="live-facts"><span><i class="live-pip"></i> مباشر</span><span>◉ ١٢٨ مشاهدًا</span><span>♙ ٢٤ مزايدًا</span></div>
-        <button class="quiet-button" id="leaveAuctionButton" type="button">اكتفيت — متابعة كمشاهد</button>
-      </div>
-      <div class="auction-room">
-        <section class="video-stage" aria-label="بث المنتج المباشر">
-          <div class="stage-top"><span class="live-label"><i></i> مباشر</span><span class="quality-label">HD · تأخير منخفض</span></div>
-          <div class="product-orbit" aria-hidden="true"><div class="watch-strap top"></div><div class="watch-face"><i></i><b>٢</b></div><div class="watch-strap bottom"></div></div>
-          <div class="stage-gradient"></div>
-          <div class="host-strip"><span class="host-avatar">س</span><span><small>مقدّم المزاد</small><b>سالم الرواحي</b></span><i title="مضيف موثق">✓</i></div>
-          <div class="lot-queue"><small>التالي</small><span class="queue-thumb camera-photo"></span><span><b>لايكا M6</b><small>يبدأ من ٥٥٠ ر.ع.</small></span><button type="button" data-view="lots">التفاصيل</button></div>
-        </section>
-        <section class="bid-panel">
-          <div class="lot-heading"><div><p class="eyebrow">الجولة ٢ من ٨ · ساعات فاخرة</p><h1 id="auctionTitle">ساعة أوميغا سيماستر<br>إصدار ٢٠٢٢</h1></div><button class="icon-button" type="button" id="favoriteButton" aria-pressed="false" aria-label="إضافة للمفضلة">♡</button></div>
-          <p class="lot-description">بحالة ممتازة، مع العلبة والبطاقة الأصلية. تقرير الحالة والصور التفصيلية محفوظة مع نتيجة البيع.</p>
-          <button class="condition-link" type="button" data-open-modal="conditionModal">عرض تقرير الحالة الكامل <span>←</span></button>
-          <div class="current-price-card" id="currentPriceCard"><small>السعر الحالي</small><strong><span data-current-price>٨٦٠.٠٠٠</span> <em>ر.ع.</em></strong><p><span class="leader-avatar" id="leaderAvatar">ن</span><span id="leaderStatus">المتصدر الآن <b data-leader>نورس_٧</b></span></p></div>
-          <div class="timer-card" id="timerCard"><div><small>الوقت المتبقي</small><b data-timer>00:31</b></div><p><i>↻</i> إغلاق مرن: أي عرض في آخر ١٠ ثوانٍ يعيد المؤقت إلى ١٠ ثوانٍ.</p></div>
-          <div class="bid-prompt"><span>اختر قيمة الزيادة</span><small>اضغط مطولًا حتى يكتمل المؤشر</small></div>
-          <div class="bid-buttons" id="bidButtons">
-            <button class="hold-bid" type="button" data-increment="1000"><span class="hold-fill"></span><small>⚡ زايد</small><b>+ ١ ر.ع.</b><em>يصبح <span data-result-price="1000">٨٦١.٠٠٠</span></em></button>
-            <button class="hold-bid recommended" type="button" data-increment="5000"><span class="hold-fill"></span><i>الأكثر استخدامًا</i><small>🔥 زايد</small><b>+ ٥ ر.ع.</b><em>يصبح <span data-result-price="5000">٨٦٥.٠٠٠</span></em></button>
-            <button class="hold-bid" type="button" data-increment="10000"><span class="hold-fill"></span><small>🚀 زايد</small><b>+ ١٠ ر.ع.</b><em>يصبح <span data-result-price="10000">٨٧٠.٠٠٠</span></em></button>
-          </div>
-          <p class="binding-copy">عرضك ملزم بعد قبوله · لا توجد دردشة أو رسائل عامة</p>
-          <div class="leaderboard"><div><span>أعلى المزايدين</span><small>آخر تحديث الآن</small></div><ol id="leaderboardList"></ol></div>
-          <button class="reset-demo" type="button" id="resetAuctionButton">إعادة الجولة التجريبية</button>
-        </section>
-      </div>
-    </section>
+  <dialog class="app-dialog winner-dialog" id="winnerDialog" aria-labelledby="winnerTitle"><form method="dialog"><button class="dialog-close" value="close" aria-label="إغلاق">×</button><div class="winner-orbit">🏆</div><p class="kicker">انتهت الجولة</p><h2 id="winnerTitle">مبروك، القطعة لك!</h2><p>ثُبّتت النتيجة في هذه المعاينة باسم <b>حمد_مسقط</b>.</p><div class="winner-lot"><span class="thumb watch-story"></span><span><small>أوميغا سيماستر ٢٠٢٢</small><b><span data-current-price>٨٦٥٫٠٠٠</span> ر.ع.</b></span></div><button class="primary-action full" type="button" data-nav-target="wins" value="close">عرض الاستلام</button></form></dialog>
 
-    <section class="view" data-view-panel="lots" aria-labelledby="lotsTitle" hidden>
-      <div class="page-heading"><div><p class="eyebrow">الكتالوج</p><h1 id="lotsTitle">كل المعروضات</h1><p>شاهد التفاصيل والحالة وموعد المزاد قبل أن تقرر.</p></div><div class="catalog-count"><b>٢٤</b><span>قطعة متاحة<br>هذا الأسبوع</span></div></div>
-      <div class="category-scroller" role="group" aria-label="تصفية الأقسام"><button class="active" data-category="all">✨ الكل</button><button data-category="watches">⌚ ساعات</button><button data-category="cars">🚗 سيارات</button><button data-category="jewelry">💍 مجوهرات</button><button data-category="antiques">🏺 تحف</button><button data-category="electronics">📷 إلكترونيات</button></div>
-      <div class="catalog-toolbar"><label class="search-field"><span>⌕</span><input id="catalogSearch" type="search" placeholder="ابحث باسم القطعة أو رقمها" autocomplete="off"></label><select id="catalogSort" aria-label="ترتيب المعروضات"><option value="soon">الأقرب موعدًا</option><option value="low">السعر: الأقل أولًا</option><option value="interest">الأكثر اهتمامًا</option></select></div>
-      <div class="lot-grid" id="lotGrid">
-        <article class="lot-card" data-category="watches" data-title="ساعة أوميغا سيماستر" data-price="860" data-interest="128"><div class="lot-image watch-photo"><span class="live-label"><i></i> الآن</span><button aria-label="إضافة للمفضلة">♡</button><span class="lot-number">#MSQ-1042</span></div><div class="lot-body"><p>ساعات · حالة ممتازة</p><h2>أوميغا سيماستر — ٢٠٢٢</h2><div class="lot-meta"><span><small>السعر الحالي</small><b>٨٦٠.٠٠٠ ر.ع.</b></span><span><small>موعد المزاد</small><b>مباشر الآن</b></span></div><button data-view="live">انضم للمزاد</button></div></article>
-        <article class="lot-card" data-category="cars" data-title="مرسيدس كلاسيكية 280 SL" data-price="3800" data-interest="74"><div class="lot-image car-photo"><span class="verified-lot">تم فحصها</span><button aria-label="إضافة للمفضلة">♡</button><span class="lot-number">#MSQ-1048</span></div><div class="lot-body"><p>سيارات · تقرير فحص</p><h2>مرسيدس 280 SL كلاسيكية</h2><div class="lot-meta"><span><small>السعر الافتتاحي</small><b>٣٬٨٠٠ ر.ع.</b></span><span><small>موعد المزاد</small><b>اليوم · ٩:٠٠ م</b></span></div><button data-open-modal="lotDetails">عرض التفاصيل</button></div></article>
-        <article class="lot-card" data-category="jewelry" data-title="سوار ذهب عيار 21" data-price="120" data-interest="113"><div class="lot-image jewel-photo"><span class="verified-lot">موثّق</span><button aria-label="إضافة للمفضلة">♡</button><span class="lot-number">#MSQ-1051</span></div><div class="lot-body"><p>مجوهرات · عيار ٢١</p><h2>سوار ذهب بنقش عُماني</h2><div class="lot-meta"><span><small>السعر الافتتاحي</small><b>١٢٠.٠٠٠ ر.ع.</b></span><span><small>موعد المزاد</small><b>الخميس · ٨:٣٠ م</b></span></div><button data-open-modal="lotDetails">عرض التفاصيل</button></div></article>
-        <article class="lot-card" data-category="antiques" data-title="خنجر عماني فضة" data-price="280" data-interest="96"><div class="lot-image antique-photo"><span class="verified-lot">تقرير منشأ</span><button aria-label="إضافة للمفضلة">♡</button><span class="lot-number">#MSQ-1056</span></div><div class="lot-body"><p>تحف · قطعة تراثية</p><h2>خنجر عُماني بتفاصيل فضية</h2><div class="lot-meta"><span><small>السعر الافتتاحي</small><b>٢٨٠.٠٠٠ ر.ع.</b></span><span><small>موعد المزاد</small><b>السبت · ٧:٣٠ م</b></span></div><button data-open-modal="lotDetails">عرض التفاصيل</button></div></article>
-        <article class="lot-card" data-category="electronics" data-title="كاميرا لايكا M6" data-price="550" data-interest="88"><div class="lot-image camera-photo"><span class="verified-lot">مجرّبة</span><button aria-label="إضافة للمفضلة">♡</button><span class="lot-number">#MSQ-1060</span></div><div class="lot-body"><p>كاميرات · تعمل بالكامل</p><h2>لايكا M6 مع عدسة 35mm</h2><div class="lot-meta"><span><small>السعر الافتتاحي</small><b>٥٥٠.٠٠٠ ر.ع.</b></span><span><small>موعد المزاد</small><b>الأحد · ٩:٠٠ م</b></span></div><button data-open-modal="lotDetails">عرض التفاصيل</button></div></article>
-        <article class="lot-card" data-category="electronics" data-title="حاسوب محمول احترافي" data-price="420" data-interest="61"><div class="lot-image laptop-photo"><span class="verified-lot">ضمان فحص</span><button aria-label="إضافة للمفضلة">♡</button><span class="lot-number">#MSQ-1064</span></div><div class="lot-body"><p>إلكترونيات · شبه جديد</p><h2>حاسوب محمول للمحترفين</h2><div class="lot-meta"><span><small>السعر الافتتاحي</small><b>٤٢٠.٠٠٠ ر.ع.</b></span><span><small>موعد المزاد</small><b>الإثنين · ٨:٠٠ م</b></span></div><button data-open-modal="lotDetails">عرض التفاصيل</button></div></article>
-      </div>
-      <div class="empty-state" id="catalogEmpty" hidden><span>⌕</span><h2>لا توجد قطعة بهذا الوصف</h2><p>جرّب كلمة أقصر أو اختر قسمًا مختلفًا.</p><button type="button" id="clearCatalogFilters">عرض كل المعروضات</button></div>
-    </section>
+  <dialog class="app-dialog detail-dialog" id="lotDialog" aria-labelledby="lotDialogTitle"><form method="dialog"><button class="dialog-close" value="close" aria-label="إغلاق">×</button><div class="detail-photo"><img src="./og.png" alt="تفاصيل ساعة أوميغا"><span>موثّقة</span></div><p class="kicker">تقرير القطعة</p><h2 id="lotDialogTitle">أوميغا سيماستر — ٢٠٢٢</h2><div class="condition-grid"><span><small>الحالة</small><b>ممتازة · ٩/١٠</b></span><span><small>الملحقات</small><b>العلبة والبطاقة</b></span><span><small>المعاينة</small><b>صور 360° متاحة</b></span><span><small>الاستلام</small><b>مسقط · خلال ٣ أيام</b></span></div><p class="dialog-note">ملاحظة تجريبية: خدش دقيق على المشبك ظاهر في الصورة الرابعة. لا توجد بيانات تحقق حقيقية في هذه المعاينة.</p><button class="primary-action full" value="close">العودة للمزاد</button></form></dialog>
 
-    <section class="view" data-view-panel="orders" aria-labelledby="ordersTitle" hidden>
-      <div class="page-heading compact"><div><p class="eyebrow">مساحتك الخاصة</p><h1 id="ordersTitle">طلباتي ورسائلي</h1><p>لا توجد دردشة عامة. تصلك هنا رسائل النظام ونتائج مزاداتك فقط.</p></div></div>
-      <div class="orders-layout">
-        <aside class="inbox-list"><div class="inbox-tabs"><button class="active">الكل</button><button>النتائج</button><button>التسليم</button></div><button class="message-item active" id="welcomeMessage"><span class="message-icon">م</span><span><b>مرحبًا بك في مزاد مسقط</b><small>أكمل بياناتك قبل أول عرض حقيقي.</small></span><time>الآن</time></button><div id="winnerMessageSlot"></div></aside>
-        <article class="message-detail" id="messageDetail"><div class="empty-message"><span>✦</span><h2>كل شيء مهم سيصل هنا</h2><p>عندما تفوز، نرسل صورة القطعة، السعر النهائي، وخيارات الاستلام أو التوصيل في رسالة خاصة.</p><button type="button" data-view="live">جرّب الفوز في الجولة</button></div></article>
-      </div>
-    </section>
+  <dialog class="app-dialog form-dialog" id="createAuctionDialog" aria-labelledby="createAuctionTitle"><form id="createAuctionForm"><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><p class="kicker">إنشاء منظم، لا نموذج طويل</p><h2 id="createAuctionTitle">مزاد جديد في ٤ قرارات</h2><div class="form-progress"><i class="active"></i><i></i><i></i><i></i></div><div class="form-grid"><label><span>اسم المزاد</span><input name="title" required placeholder="مثال: مقتنيات الساعات النادرة"></label><label><span>القسم</span><select name="category" required><option value="">اختر القسم</option><option>ساعات</option><option>سيارات</option><option>مجوهرات</option><option>تحف</option><option>إلكترونيات</option></select></label><label><span>الموعد</span><input name="date" type="datetime-local" required></label><label><span>المضيف</span><select name="host" required><option>سالم الرواحي</option><option>مريم الحارثية</option></select></label></div><fieldset><legend>زيادات المزايدة التي ستظهر للناس</legend><label class="check-pill"><input type="checkbox" checked value="1"><span>+١ ر.ع.</span></label><label class="check-pill"><input type="checkbox" checked value="5"><span>+٥ ر.ع.</span></label><label class="check-pill"><input type="checkbox" checked value="10"><span>+١٠ ر.ع.</span></label></fieldset><div class="dialog-actions"><button class="secondary-action" type="button" data-close-dialog>إلغاء</button><button class="primary-action" type="submit">حفظ كمسودة</button></div></form></dialog>
 
-    <section class="view" data-view-panel="account" aria-labelledby="accountTitle" hidden>
-      <div class="account-header"><div class="account-avatar">ح</div><div><p class="eyebrow">حساب المزايد</p><h1 id="accountTitle">حمد البلوشي</h1><p>@<span id="profileNicknamePreview">حمد_مسقط</span> · عضو تجريبي منذ أغسطس ٢٠٢٦</p></div><span class="account-level">جاهزية الحساب ٧٥٪</span></div>
-      <div class="account-grid">
-        <form class="settings-card" id="profileForm"><div class="card-title"><div><h2>بيانات التواصل</h2><p>تُستخدم فقط للفوز والتسليم، ولا تظهر للمزايدين.</p></div><span>خاص</span></div><label>الاسم الظاهر<input id="nicknameInput" name="nickname" maxlength="24" value="حمد_مسقط" required><small>هذا فقط ما يراه الآخرون في قائمة المتصدرين.</small></label><div class="form-row"><label>رقم الهاتف<input name="phone" type="tel" dir="ltr" value="+968 9••• ••24"><span class="field-state verified">✓ موثّق تجريبيًا</span></label><label>البريد الإلكتروني<input name="email" type="email" dir="ltr" value="hamad@example.test"><span class="field-state">بحاجة للتأكيد</span></label></div><label>ولاية الاستلام<select name="region"><option>مسقط</option><option>مطرح</option><option>السيب</option><option>بوشر</option><option>العامرات</option><option>قريات</option></select></label><button class="primary-button" type="submit">حفظ التغييرات</button><p class="form-status" id="profileStatus" role="status"></p></form>
-        <div class="settings-stack"><section class="settings-card readiness-card"><div class="card-title"><div><h2>جاهزية المزايدة</h2><p>مطلوبة قبل المزاد الحقيقي.</p></div><b>٣/٤</b></div><ul><li class="done"><i>✓</i><span><b>رقم الهاتف</b><small>تم التحقق</small></span></li><li class="done"><i>✓</i><span><b>الاسم المستعار</b><small>ظاهر وآمن</small></span></li><li class="done"><i>✓</i><span><b>منطقة الاستلام</b><small>مسقط</small></span></li><li><i>!</i><span><b>وسيلة الدفع</b><small>غير مفعلة في المعاينة</small></span></li></ul></section><section class="settings-card"><div class="card-title"><div><h2>التنبيهات</h2><p>تحكم بما يصلك.</p></div></div><label class="switch-row"><span><b>بدء مزاد محفوظ</b><small>قبل الموعد بـ١٥ دقيقة</small></span><input type="checkbox" checked><i></i></label><label class="switch-row"><span><b>تم تجاوز عرضي</b><small>فوري أثناء الجولة</small></span><input type="checkbox" checked><i></i></label><label class="switch-row"><span><b>نتيجة المزاد</b><small>دائمًا</small></span><input type="checkbox" checked disabled><i></i></label></section></div>
-      </div>
-    </section>
+  <dialog class="app-dialog form-dialog" id="inviteDialog" aria-labelledby="inviteTitle"><form id="inviteForm"><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><p class="kicker">مقعد واحد، دور واحد</p><h2 id="inviteTitle">دعوة شخص للفريق</h2><label><span>الاسم</span><input name="name" required placeholder="الاسم الكامل"></label><label><span>البريد أو الهاتف</span><input name="contact" required placeholder="example@company.om"></label><label><span>الدور</span><select name="role"><option>مضيف مزاد</option><option>مدير كتالوج</option><option>تجهيز وتسليم</option><option>محلل</option></select></label><p class="dialog-note">المستخدم الجديد يشغل مقعدًا بعد قبول الدعوة. المتاح حاليًا: مقعدان.</p><button class="primary-action full" type="submit">إرسال دعوة تجريبية</button></form></dialog>
 
-    <section class="view admin-view" data-view-panel="admin" aria-labelledby="adminTitle" hidden>
-      <div class="admin-top"><div><p class="eyebrow">مساحة المالك · معاينة</p><h1 id="adminTitle">صباح الخير، عبدالله</h1><p>ما يحتاج قرارك اليوم، ثم بقية التفاصيل.</p></div><div><button class="secondary-button" type="button" data-open-modal="teamModal">إدارة الفريق</button><button class="primary-button" type="button" data-open-modal="createAuction">＋ إنشاء مزاد</button></div></div>
-      <div class="decision-strip"><div class="decision-title"><i>!</i><span><b>٣ قرارات تنتظر إجراءك</b><small>مرتبة حسب الأثر على البيع والتسليم</small></span></div><button data-open-modal="createAuction"><span><b>١</b><small>مزاد يحتاج مضيفًا</small></span><em>عيّن الآن ←</em></button><button data-view="orders"><span><b>٢</b><small>طلبات بانتظار التسليم</small></span><em>راجعها ←</em></button></div>
-      <div class="metric-grid"><article><span class="metric-icon">💰</span><small>المبيعات هذا الشهر</small><b>١٨٬٤٢٠.٠٠٠ <em>ر.ع.</em></b><p class="up">↑ ١٢٪ عن الشهر الماضي</p></article><article><span class="metric-icon">🔥</span><small>المزايدون النشطون</small><b>١٬٢٨٤</b><p>٣٤٪ عادوا لأكثر من مزاد</p></article><article><span class="metric-icon">🏷️</span><small>نسبة بيع القطع</small><b>٨٧٪</b><p class="up">↑ ٥ نقاط هذا الشهر</p></article><article><span class="metric-icon">⏱️</span><small>متوسط زمن الإغلاق</small><b>٢:٤١ <em>دقيقة</em></b><p>للجولة الواحدة</p></article></div>
-      <div class="admin-grid">
-        <section class="admin-card live-control"><div class="admin-card-header"><div><h2>المزاد الجاري</h2><p>غرفة الساعات الفاخرة · المضيف سالم</p></div><span class="live-label"><i></i> مستقر</span></div><div class="live-control-body"><div class="mini-stage"><div class="mini-watch"></div><span>◉ ١٢٨</span></div><div class="control-facts"><div><small>القطعة الحالية</small><b>أوميغا سيماستر</b></div><div><small>السعر</small><b><span data-current-price>٨٦٠.٠٠٠</span> ر.ع.</b></div><div><small>المزايدون</small><b>٢٤</b></div><div><small>الجولة</small><b>٢ من ٨</b></div><button class="primary-button" type="button" data-open-modal="cameraStudio">فتح استوديو البث</button><button class="danger-quiet" type="button">إيقاف مؤقت موثّق</button></div></div></section>
-        <section class="admin-card demand-chart"><div class="admin-card-header"><div><h2>الطلب حسب القسم</h2><p>المزايدون الفعليون، لا المشاهدات</p></div><select aria-label="فترة التحليل"><option>آخر ٣٠ يومًا</option><option>هذا الأسبوع</option></select></div><div class="bars" aria-label="مخطط الطلب"><div><span>ساعات</span><i style="--bar:92%"></i><b>٣٨٪</b></div><div><span>سيارات</span><i style="--bar:76%"></i><b>٢٩٪</b></div><div><span>مجوهرات</span><i style="--bar:58%"></i><b>١٨٪</b></div><div><span>تحف</span><i style="--bar:35%"></i><b>٩٪</b></div><div><span>إلكترونيات</span><i style="--bar:24%"></i><b>٦٪</b></div></div><div class="insight"><i>✦</i><span><b>فرصة هذا الأسبوع</b><small>الساعات تحقق أعلى تحويل من مشاهدة إلى مزايدة: ٢٢٪.</small></span></div></section>
-      </div>
-      <section class="admin-card order-table-card"><div class="admin-card-header"><div><h2>آخر عمليات البيع</h2><p>السعر الفائز منفصل عن المبلغ المدفوع وحالة التسليم.</p></div><button type="button" data-view="orders">عرض الكل</button></div><div class="table-wrap"><table><thead><tr><th>القطعة</th><th>المشتري</th><th>المنطقة</th><th>السعر الفائز</th><th>المدفوع</th><th>التسليم</th></tr></thead><tbody><tr><td><span class="table-thumb camera-photo"></span><b>كاميرا لايكا M6</b></td><td>mct_ahmed</td><td>بوشر</td><td>٧٢٠.٠٠٠ ر.ع.</td><td><span class="tag success">٧٢٠.٠٠٠</span></td><td><span class="tag warning">بانتظار الاستلام</span></td></tr><tr><td><span class="table-thumb jewel-photo"></span><b>سوار ذهب عيار ٢١</b></td><td>مها_٢٤</td><td>السيب</td><td>١٩٥.٠٠٠ ر.ع.</td><td><span class="tag success">١٩٥.٠٠٠</span></td><td><span class="tag success">تم التسليم</span></td></tr><tr><td><span class="table-thumb antique-photo"></span><b>خنجر عُماني فضة</b></td><td>نورس_٧</td><td>مطرح</td><td>٤٢٠.٠٠٠ ر.ع.</td><td><span class="tag neutral">لم يدفع</span></td><td><span class="tag neutral">معلّق</span></td></tr></tbody></table></div></section>
-      <section class="admin-card team-preview"><div class="admin-card-header"><div><h2>الفريق والصلاحيات</h2><p>كل شخص يرى ويفعل ما يحتاجه فقط.</p></div><button type="button" data-open-modal="teamModal">إدارة الصلاحيات</button></div><div class="team-row"><div><span class="team-avatar gold">س</span><span><b>سالم الرواحي</b><small>مضيف مزاد · مباشر الآن</small></span></div><div><span class="team-avatar green">م</span><span><b>مريم الحارثية</b><small>إدارة الكتالوج</small></span></div><div><span class="team-avatar blue">ع</span><span><b>علي الشقصي</b><small>التجهيز والتسليم</small></span></div><button type="button" data-open-modal="teamModal">＋ دعوة شخص</button></div></section>
-    </section>
-  </main>
+  <dialog class="app-dialog plans-dialog" id="plansDialog" aria-labelledby="plansTitle"><form method="dialog"><button class="dialog-close" value="close" aria-label="إغلاق">×</button><p class="kicker">توسّع بموافقة المالك</p><h2 id="plansTitle">اختر حجم مساحة العمل</h2><div class="dialog-plan-grid"><button type="button" data-plan-choice="4"><small>منظّم</small><b>٤ مقاعد</b><span>فريق صغير</span></button><button class="active" type="button" data-plan-choice="10"><small>استوديو</small><b>١٠ مقاعد</b><span>خطة حسابك</span></button><button type="button" data-plan-choice="50"><small>شبكة</small><b>٥٠ مقعدًا</b><span>فروع متعددة</span></button></div><p class="dialog-note">طلب التغيير يُرسل للمالك للموافقة؛ لا يتغير الحد بمجرد الضغط.</p><button class="primary-action full" value="close" id="requestPlanButton">طلب تغيير الخطة</button></form></dialog>
 
-  <nav class="mobile-nav" aria-label="التنقل السفلي">
-    <button class="active" type="button" data-view="discover"><span>🏠</span>اكتشف</button>
-    <button type="button" data-view="lots"><span>🧩</span>المعروضات</button>
-    <button class="live-mobile" type="button" data-view="live"><span>🔴</span>مباشر</button>
-    <button type="button" data-view="orders"><span>🏆</span>طلباتي<i id="mobileNotificationDot"></i></button>
-    <button type="button" data-view="account"><span>👤</span>حسابي</button>
-  </nav>
+  <dialog class="app-dialog camera-dialog" id="cameraDialog" aria-labelledby="cameraTitle"><div><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><div class="camera-copy"><p class="kicker">إعداد أجهزة الغرفة</p><h2 id="cameraTitle">اختبر الصورة قبل أن يراك أحد</h2><p>المعاينة تبقى على جهازك، والبث الحقيقي غير مفعّل هنا.</p></div><div class="camera-preview"><video id="cameraVideo" data-camera-video autoplay muted playsinline></video><div class="camera-placeholder" id="cameraPlaceholder" data-camera-placeholder><span>🎥</span><b>الكاميرا متوقفة</b><small>شغّلها عندما تكون جاهزًا.</small></div><div class="camera-hud"><span>PREVIEW</span><b id="filterLabel">طبيعي</b></div></div><div class="camera-controls"><button class="primary-action" type="button" id="startCameraButton" data-camera-toggle>تشغيل الكاميرا</button><div class="filter-row"><button class="active" type="button" data-filter="none" data-filter-label="طبيعي">طبيعي</button><button type="button" data-filter="sepia(.25) saturate(1.15)" data-filter-label="دافئ">دافئ</button><button type="button" data-filter="contrast(1.18) saturate(1.08)" data-filter-label="واضح">واضح</button><button type="button" data-filter="grayscale(1)" data-filter-label="أحادي">أحادي</button></div><div class="camera-checks"><span>✓ المشاهد لا يستطيع النشر</span><span>✓ الميكروفون للمضيف فقط</span><span>— يلزم خادم بث للإنتاج</span></div></div></div></dialog>
 
-  <div class="modal" id="demoInfo" role="dialog" aria-modal="true" aria-labelledby="demoInfoTitle" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card small"><button class="modal-close" type="button" data-close-modal aria-label="إغلاق">×</button><span class="modal-symbol">✦</span><h2 id="demoInfoTitle">هذه معاينة تفاعلية آمنة</h2><p>تعمل المزايدة، الإغلاق المرن، رسالة الفوز، الحساب، لوحة الإدارة، والكاميرا على جهازك. لا توجد دفعات أو رسائل حقيقية، ولا تُرفع صورة الكاميرا إلى أي خادم.</p><ul class="check-list"><li>✓ بيانات العرض موسومة كتجريبية</li><li>✓ لا تُجمع بيانات شخصية حقيقية</li><li>✓ المزايدة المحلية ليست عقد بيع</li></ul><button class="primary-button full" type="button" data-close-modal>فهمت — ابدأ التجربة</button></section></div>
+  <dialog class="app-dialog form-dialog" id="newPartnerDialog" aria-labelledby="newPartnerTitle"><form id="newPartnerForm"><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><p class="kicker">من حساب إلى مساحة عمل</p><h2 id="newPartnerTitle">إنشاء حساب منظّم</h2><label><span>اسم النشاط</span><input name="business" required placeholder="مثال: دار مسقط للمقتنيات"></label><label><span>نوع الحساب</span><select name="type"><option>شركة</option><option>مؤسسة</option><option>فرد معتمد</option></select></label><label><span>الخطة المبدئية</span><select name="plan"><option>منظّم · ٤ مقاعد</option><option>استوديو · ١٠ مقاعد</option><option>شبكة · ٥٠ مقعدًا</option></select></label><label><span>حالة التفعيل</span><select name="status"><option>بانتظار المستندات</option><option>تجربة داخلية</option><option>نشط بموافقة المالك</option></select></label><p class="dialog-note">في الإنتاج يلزم تحقق هوية النشاط، عقد الاشتراك، وتدقيق من منح الموافقة.</p><button class="primary-action full" type="submit">إنشاء الحساب التجريبي</button></form></dialog>
 
-  <div class="modal" id="conditionModal" role="dialog" aria-modal="true" aria-labelledby="conditionTitle" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card"><button class="modal-close" type="button" data-close-modal aria-label="إغلاق">×</button><p class="eyebrow">تقرير الحالة · #MSQ-1042</p><h2 id="conditionTitle">أوميغا سيماستر — ٢٠٢٢</h2><div class="condition-score"><b>٩.١</b><span>من ١٠<br><small>حالة ممتازة</small></span></div><div class="condition-grid"><div><small>الأصالة</small><b>الرقم والبطاقة متطابقان</b></div><div><small>التشغيل</small><b>تم الاختبار ٤٨ ساعة</b></div><div><small>العيوب</small><b>خدش دقيق عند موضع ٤</b></div><div><small>المرفقات</small><b>علبة وبطاقة وكتيّب</b></div></div><p class="modal-note">هذا تقرير تجريبي وليس شهادة أصالة حقيقية.</p></section></div>
+  <dialog class="app-dialog owner-partner-dialog" id="partnerProfileDialog" aria-labelledby="partnerProfileTitle"><form id="ownerPartnerControlForm"><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><div class="owner-account-head"><span class="company-avatar teal">د</span><span><p class="kicker">حساب منظّم</p><h2 id="partnerProfileTitle">دار الوقت للمزادات</h2><small>ORG-MSQ-024 · معتمد منذ ١٤ مايو ٢٠٢٦</small></span><span class="status-chip success" id="ownerPartnerStatus">نشط</span></div><div class="owner-account-metrics"><span><small>الخطة</small><b>استوديو · ١٠</b></span><span><small>المقاعد</small><b>٦ مستخدمة · ٢ معلّقة</b></span><span><small>الغرف الآن</small><b>١ من ٢</b></span><span><small>مبيعات الشهر</small><b>٨,٤٢٠ ر.ع.</b></span></div><div class="owner-account-controls"><label><span>الخطة</span><select name="ownerPlan"><option>منظّم · ٤ مقاعد</option><option selected>استوديو · ١٠ مقاعد</option><option>شبكة · ٥٠ مقعدًا</option></select></label><label><span>الغرف المتزامنة</span><select name="concurrentRooms"><option>غرفة واحدة</option><option selected>غرفتان</option><option>خمس غرف</option></select></label><label><span>حالة التجديد</span><select name="renewal"><option selected>نشط بموافقة المالك</option><option>بانتظار مراجعة</option><option>غير متجدد</option></select></label><label><span>ملاحظة داخلية</span><input name="ownerNote" placeholder="لا تظهر للمنظّم"></label></div><div class="owner-account-permissions"><h3>صلاحيات المساحة</h3><label><input type="checkbox" checked><span>فتح بث مباشر</span></label><label><input type="checkbox" checked><span>دعوة أعضاء</span></label><label><input type="checkbox" checked><span>إدارة التسليم</span></label><label><input type="checkbox"><span>فروع متعددة</span></label></div><p class="dialog-note">كل تغيير يُسجّل باسم المالك وسببه. لا يمكن تغيير عروض مقبولة أو فائز من هذه اللوحة.</p><div class="owner-account-actions"><button class="reject-button" type="button" data-owner-account-action="suspend">تعليق الحساب</button><button class="secondary-action" type="button" data-nav-target="owner-audit">سجل التدقيق</button><button class="primary-action" type="submit">حفظ التغييرات</button></div></form></dialog>
 
-  <div class="modal" id="lotDetails" role="dialog" aria-modal="true" aria-labelledby="lotDetailsTitle" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card"><button class="modal-close" type="button" data-close-modal aria-label="إغلاق">×</button><div class="detail-hero car-photo"></div><p class="eyebrow">تفاصيل القطعة</p><h2 id="lotDetailsTitle">كل ما تحتاجه قبل المزايدة</h2><p>صفحة نموذجية تعرض الفيديو، صور العيوب، الوصف، تقرير التحقق، الموعد، مكان المعاينة، وشروط الاستلام قبل أي عرض.</p><div class="detail-actions"><button class="secondary-button" type="button" data-close-modal>إغلاق</button><button class="primary-button" type="button" data-close-modal data-view="live">شاهد نموذج المزاد</button></div></section></div>
+  <dialog class="app-dialog close-lot-dialog" id="closeLotDialog" aria-labelledby="closeLotTitle"><form method="dialog"><button class="dialog-close" value="cancel" aria-label="إلغاء">×</button><span class="dialog-symbol gold-symbol">✓</span><p class="kicker">قرار لا يُنفّذ بصمت</p><h2 id="closeLotTitle">إغلاق الجولة وتثبيت الأعلى؟</h2><div class="close-lot-summary"><span><small>أعلى مزايد الآن</small><b data-leader>نورس_٧</b></span><span><small>السعر الحالي</small><b><span data-current-price>٨٦٠٫٠٠٠</span> ر.ع.</b></span></div><p class="dialog-note">سينتقل المزاد إلى التثبيت ثم النتيجة. لن يستطيع المضيف تعديل العرض الفائز بعد ذلك من الواجهة.</p><button class="primary-action full" type="button" id="confirmCloseLotButton">نعم، أغلق وثبّت النتيجة</button><button class="secondary-action full" value="cancel">العودة للغرفة</button></form></dialog>
 
-  <div class="modal" id="cameraStudio" role="dialog" aria-modal="true" aria-labelledby="cameraTitle" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card camera-modal"><div class="camera-header"><div><p class="eyebrow">استوديو المضيف · معاينة محلية</p><h2 id="cameraTitle">جهّز الكاميرا قبل البث</h2></div><button class="modal-close static" type="button" data-close-modal aria-label="إغلاق">×</button></div><div class="camera-layout"><div class="camera-preview" id="cameraPreview"><video id="cameraVideo" autoplay muted playsinline></video><div class="camera-placeholder" id="cameraPlaceholder"><span>◉</span><b>الكاميرا متوقفة</b><small>لن تُرسل أي صورة خارج جهازك.</small></div><div class="camera-hud"><span>معاينة فقط</span><b id="cameraFilterLabel">طبيعي</b></div></div><div class="camera-controls"><button class="primary-button full" type="button" id="startCameraButton">تشغيل الكاميرا</button><label class="upload-button">اختيار فيديو تجريبي<input id="videoUpload" type="file" accept="video/*" hidden></label><div><small>الفلاتر</small><div class="filter-pills"><button class="active" data-filter="none" data-label="طبيعي">طبيعي</button><button data-filter="sepia(.28) saturate(1.18)" data-label="دافئ">دافئ</button><button data-filter="hue-rotate(175deg) saturate(.85)" data-label="بارد">بارد</button><button data-filter="contrast(1.22) saturate(1.08)" data-label="تباين">تباين</button><button data-filter="grayscale(1)" data-label="أبيض وأسود">أبيض وأسود</button></div></div><div class="camera-checks"><p><i>✓</i> الميكروفون مغلق للمشاهدين في هذه المعاينة</p><p><i>✓</i> المشاهدون لا يملكون صلاحية النشر</p><p><i>!</i> في الإنتاج يُطبّق الفلتر على مسار الفيديو الخارج</p></div><button class="go-live-button" type="button" id="goLiveButton" disabled><span>●</span> بدء بث تجريبي</button></div></div></section></div>
+  <dialog class="app-dialog form-dialog" id="addLotDialog" aria-labelledby="addLotTitle"><form id="addLotForm"><button class="dialog-close" type="button" data-close-dialog aria-label="إغلاق">×</button><p class="kicker">قطعة واضحة قبل المزاد</p><h2 id="addLotTitle">إضافة قطعة للكتالوج</h2><label><span>اسم القطعة</span><input name="lotName" required placeholder="اسم مختصر ودقيق"></label><label><span>القسم</span><select name="lotCategory"><option>ساعات</option><option>سيارات</option><option>مجوهرات</option><option>تحف</option><option>إلكترونيات</option></select></label><label><span>سعر البداية بالريال العُماني</span><input name="opening" type="number" min="0" step="0.001" required placeholder="0.000"></label><p class="dialog-note">الصور وتقارير الحالة تحتاج تخزينًا خاصًا وفحص نوع الملف في الإنتاج.</p><button class="primary-action full" type="submit">حفظ القطعة كمسودة</button></form></dialog>
 
-  <div class="modal" id="createAuction" role="dialog" aria-modal="true" aria-labelledby="createTitle" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card drawer"><button class="modal-close" type="button" data-close-modal aria-label="إغلاق">×</button><p class="eyebrow">إنشاء مزاد جديد</p><h2 id="createTitle">جهّز الجولة بوضوح</h2><form id="createAuctionForm"><label>اسم المزاد<input name="title" required placeholder="مثال: مختارات الساعات الفاخرة"></label><div class="form-row"><label>القسم<select name="category"><option>ساعات</option><option>سيارات</option><option>مجوهرات</option><option>تحف</option><option>إلكترونيات</option></select></label><label>المضيف<select name="host"><option>سالم الرواحي</option><option>بدون تعيين</option></select></label></div><fieldset><legend>زيادات المزايدة المتاحة</legend><label class="check-chip"><input type="checkbox" name="increments" value="1" checked><span>+١ ر.ع.</span></label><label class="check-chip"><input type="checkbox" name="increments" value="5" checked><span>+٥ ر.ع.</span></label><label class="check-chip"><input type="checkbox" name="increments" value="10" checked><span>+١٠ ر.ع.</span></label></fieldset><label class="switch-row"><span><b>الإغلاق المرن</b><small>يمدد الجولة عند عرض في آخر ١٠ ثوانٍ</small></span><input name="softClose" type="checkbox" checked><i></i></label><div class="form-row"><label>مدة الجولة<select name="duration"><option>٣٠ ثانية</option><option>٦٠ ثانية</option><option>٩٠ ثانية</option></select></label><label>السعر الافتتاحي<input name="opening" type="number" min="1" value="100"></label></div><p class="locked-note">بعد بدء الجولة تُقفل الزيادات والسعر الافتتاحي ولا يمكن تغييرهما.</p><button class="primary-button full" type="submit">حفظ كمسودة آمنة</button><p class="form-status" id="createStatus" role="status"></p></form></section></div>
+  <dialog class="app-dialog delivery-dialog" id="deliveryDialog" aria-labelledby="deliveryTitle"><form method="dialog"><button class="dialog-close" value="close" aria-label="إغلاق">×</button><span class="dialog-symbol blue-symbol">📦</span><p class="kicker">الخطوة التالية واضحة</p><h2 id="deliveryTitle">كيف تريد استلام القطعة؟</h2><label class="delivery-option"><input type="radio" name="delivery" checked><span>🏬</span><span><b>الاستلام من بوشر</b><small>مجاني · خلال ٣ أيام</small></span></label><label class="delivery-option"><input type="radio" name="delivery"><span>🚚</span><span><b>توصيل داخل مسقط</b><small>السعر والموعد يؤكدان لاحقًا</small></span></label><button class="primary-action full" value="close" data-toast="تم حفظ اختيار الاستلام في هذه المعاينة.">تأكيد الاختيار</button></form></dialog>
 
-  <div class="modal" id="teamModal" role="dialog" aria-modal="true" aria-labelledby="teamTitle" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card wide"><button class="modal-close" type="button" data-close-modal aria-label="إغلاق">×</button><p class="eyebrow">الصلاحيات</p><h2 id="teamTitle">الفريق يرى ما يحتاجه فقط</h2><p class="modal-lead">لا يستطيع المضيف منح صلاحيات أو تعديل نتيجة مغلقة أو تصدير بيانات العملاء.</p><div class="permission-table"><div class="permission-head"><span>الشخص والدور</span><span>فتح بث</span><span>إدارة قطع</span><span>التسليم</span><span>التحليلات</span></div><div><span><b>سالم الرواحي</b><small>مضيف مزاد</small></span><input type="checkbox" checked><input type="checkbox"><input type="checkbox"><input type="checkbox"></div><div><span><b>مريم الحارثية</b><small>مديرة الكتالوج</small></span><input type="checkbox"><input type="checkbox" checked><input type="checkbox"><input type="checkbox"></div><div><span><b>علي الشقصي</b><small>التجهيز والتسليم</small></span><input type="checkbox"><input type="checkbox"><input type="checkbox" checked><input type="checkbox"></div><div><span><b>نورة المعمرية</b><small>محللة</small></span><input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox" checked></div></div><button class="primary-button" id="savePermissions" type="button">حفظ الصلاحيات التجريبية</button></section></div>
+  <dialog class="app-dialog info-dialog" id="notificationDialog" aria-labelledby="notificationTitle"><form method="dialog"><button class="dialog-close" value="close" aria-label="إغلاق">×</button><p class="kicker">اليوم</p><h2 id="notificationTitle">إشعارات تستحق انتباهك</h2><div class="notification-list"><button value="close" data-nav-target="live"><span class="color-icon coral">●</span><span><b>بدأ مزاد دار الوقت</b><small>القطعة التي حفظتها معروضة الآن.</small></span><time>الآن</time></button><button value="close" data-nav-target="wins"><span class="color-icon gold">📦</span><span><b>اختر استلام فوزك</b><small>كاميرا لايكا جاهزة في بوشر.</small></span><time>منذ ساعة</time></button></div></form></dialog>
 
-  <div class="modal" id="bidConfirmModal" role="dialog" aria-modal="true" aria-labelledby="bidConfirmTitle" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card small bid-confirm-card"><button class="modal-close" type="button" data-close-modal aria-label="إلغاء">×</button><span class="modal-symbol">↗</span><p class="eyebrow">تأكيد واضح قبل الإرسال</p><h2 id="bidConfirmTitle">هل تؤكد هذه المزايدة؟</h2><div class="bid-confirm-amount"><small>زيادة العرض</small><b id="bidConfirmIncrement">+٥ ر.ع.</b><span>السعر بعد القبول <strong id="bidConfirmPrice">٨٦٥٫٠٠٠ ر.ع.</strong></span></div><p>هذا التأكيد مخصص للوحة المفاتيح وتقنيات المساعدة. في المعاينة لا ينشأ عقد بيع أو دفع حقيقي.</p><button class="primary-button full" id="confirmBidButton" type="button">تأكيد وإرسال العرض</button><button class="secondary-button full" type="button" data-close-modal>إلغاء</button></section></div>
-
-  <div class="modal" id="winnerModal" role="dialog" aria-modal="true" aria-labelledby="winnerTitle" hidden><div class="modal-backdrop"></div><section class="modal-card winner-card"><span class="winner-confetti">✦</span><p class="eyebrow">تم تثبيت النتيجة</p><h2 id="winnerTitle">مبروك، القطعة لك!</h2><p>فزت بساعة أوميغا سيماستر بسعر <b id="winnerPrice">—</b> ر.ع. هذه نتيجة تجريبية وليست عقد بيع.</p><div class="winner-product"><div class="watch-photo"></div><span><small>#MSQ-1042</small><b>أوميغا سيماستر — ٢٠٢٢</b><em>مع العلبة والبطاقة</em></span></div><button class="primary-button full" id="openWinnerMessage" type="button">فتح رسالة الاستلام الخاصة</button><button class="secondary-button full" type="button" id="dismissWinner">العودة للمشاهدة</button></section></div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite" hidden><i>✓</i><span id="toastText"></span></div>
-  <noscript><div class="noscript">يحتاج هذا النموذج إلى JavaScript لتجربة المزايدة والكاميرا ولوحة الإدارة.</div></noscript>
-  <script type="module" src="./app.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastIcon">✓</span><b id="toastText"></b></div>
+  <noscript><div class="noscript"><b>يحتاج MAZQAT إلى JavaScript لتشغيل المعاينة التفاعلية.</b></div></noscript>
+  <script type="module" src="./app.js?v=0.10.0"></script>
 </body>
 </html>

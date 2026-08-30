@@ -4,6 +4,11 @@ import {
   applyBid,
   createAuctionState,
   formatOMR,
+  closeAuction,
+  extendAuction,
+  pauseAuction,
+  resumeAuction,
+  setAllowedIncrements,
   settleAuction,
   tickAuction,
   withdrawParticipant,
@@ -53,4 +58,27 @@ test('server-style countdown settles to a single winner', () => {
 
 test('formats Omani rials with three decimal places', () => {
   assert.match(formatOMR(860000), /٨٦٠[٫.]٠٠٠|860[.,]000/);
+});
+
+test('organizer can pause, extend, and resume without losing accepted bids', () => {
+  const original = createAuctionState({ remainingSeconds: 12 });
+  const paused = pauseAuction(original);
+  assert.equal(paused.status, 'paused');
+  assert.equal(tickAuction(paused).remainingSeconds, 12);
+  const extended = extendAuction(paused, 30);
+  assert.equal(extended.remainingSeconds, 42);
+  assert.equal(resumeAuction(extended).status, 'live');
+  assert.deepEqual(extended.bids, original.bids);
+});
+
+test('organizer increment configuration is enforced by the bid engine', () => {
+  const configured = setAllowedIncrements(createAuctionState(), [5000]);
+  assert.equal(applyBid(configured, { incrementBaisa: 1000, nickname: 'اختبار', idempotencyKey: 'blocked-increment' }).code, 'INVALID_INCREMENT');
+  assert.equal(applyBid(configured, { incrementBaisa: 5000, nickname: 'اختبار', idempotencyKey: 'allowed-increment' }).ok, true);
+});
+
+test('manual close enters the same single settlement path', () => {
+  const closing = closeAuction(createAuctionState());
+  assert.equal(closing.status, 'closing');
+  assert.equal(settleAuction(closing).winner, 'نورس_٧');
 });

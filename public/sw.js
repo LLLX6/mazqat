@@ -1,5 +1,6 @@
-const CACHE_NAME = 'mazqat-shell-v0.9.1-1';
-const SHELL = ['./demo.html', './app.css', './khadamati-theme.css', './app.js', './auction-engine.js', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+const CACHE_NAME = 'mazqat-shell-v0.10.0';
+const SHELL = ['./demo.html', './app.css', './app.js', './auction-engine.js', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './og.png'];
+const SHELL_PATHS = new Set(SHELL.map((asset) => new URL(asset, self.location.href).pathname));
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL)));
@@ -30,6 +31,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  const isShellAsset = SHELL.some((asset) => url.pathname.endsWith(asset.replace('./', '/')));
-  if (isShellAsset) event.respondWith(caches.match(request).then((cached) => cached || fetch(request)));
+  if (SHELL_PATHS.has(url.pathname)) {
+    event.respondWith(caches.match(request, { ignoreSearch: true }).then((cached) => cached || fetch(request)));
+  }
 });
